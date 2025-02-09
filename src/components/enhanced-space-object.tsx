@@ -1,15 +1,22 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useState, useEffect, useRef, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
-import {BlackHole} from './black-hole';
+import React, { memo, useCallback } from 'react';
+import { Suspense, lazy } from 'react';
+
 
 interface EnhancedSpaceObjectProps {
   type: 'astronaut' | 'moon';
   className?: string;
 }
 
-const EnhancedSpaceObject = forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>(({ type, className }, ref) => {
+const BlackHole = lazy(() => import('./black-hole'));
+
+const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>(({ type, className }, ref) => {
   const [showBlackHole, setShowBlackHole] = useState(false);
+  const handleReset = useCallback(() => {
+    setShowBlackHole(false);
+  }, []);
 
   // Motion values for position
   const x = useMotionValue(Math.random() * window.innerWidth * 0.6);
@@ -48,16 +55,12 @@ const EnhancedSpaceObject = forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>
 
   return (
     <>
+    <Suspense>
       {showBlackHole && (
         <BlackHole
-          onReset={() => {
-            setShowBlackHole(false);
-          } } active={false} position={{
-            x: 0,
-            y: 0
-          }}        />
+          onReset={handleReset} active={false} position={{ x: 0, y: 0 }} />
       )}
-
+    </Suspense>    
       <motion.div
         ref={ref}
         className={cn(
@@ -97,6 +100,6 @@ const EnhancedSpaceObject = forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>
       </motion.div>
     </>
   );
-});
+}));
 
 export default EnhancedSpaceObject;

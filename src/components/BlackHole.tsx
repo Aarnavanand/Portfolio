@@ -181,7 +181,7 @@ function Layout() {
   return (
     <div className="relative min-h-screen bg-background text-foreground">
       <SpaceBackground />
-      <SpaceObjects setIsBlackHoleActive={function (_active: boolean): void {
+      <SpaceObjects setIsBlackHoleActive={function (): void {
         throw new Error('Function not implemented.');
       } } />
       
