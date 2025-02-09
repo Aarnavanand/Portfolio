@@ -70,6 +70,7 @@ const EnhancedSpaceObject = forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>
           y: springY,
           zIndex: 0,
           touchAction: 'none',
+          willChange: 'transform',
         }}
       >
         {/* Glow effect */}
