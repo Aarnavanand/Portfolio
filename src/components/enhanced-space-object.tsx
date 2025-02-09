@@ -61,14 +61,14 @@ const EnhancedSpaceObject = forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>
       <motion.div
         ref={ref}
         className={cn(
-          'absolute select-none',
-          'w-36 h-36 flex items-center justify-center',
+          'absolute select-none w-24 h-24 md:w-36 md:h-36 flex items-center justify-center',
           className
         )}
         style={{
           x: springX,
           y: springY,
-          zIndex: 1, 
+          zIndex: -1,
+          touchAction: 'none',
         }}
       >
         {/* Glow effect */}
