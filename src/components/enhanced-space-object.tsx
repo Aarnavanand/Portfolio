@@ -65,6 +65,7 @@ const EnhancedSpaceObject = forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>
           className
         )}
         style={{
+          position: 'fixed',
           x: springX,
           y: springY,
           zIndex: -1,
