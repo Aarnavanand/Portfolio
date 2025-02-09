@@ -59,8 +59,8 @@ export function SpaceObjects({ setIsBlackHoleActive }: { setIsBlackHoleActive: (
 
   return (
     <motion.div className="fixed inset-0 overflow-hidden">
-      <EnhancedSpaceObject ref={astronautRef} type="astronaut" className="z-20" />
-      <EnhancedSpaceObject ref={moonRef} type="moon" className="z-20" />
+      <EnhancedSpaceObject ref={astronautRef} type="astronaut" className="z-0" />
+      <EnhancedSpaceObject ref={moonRef} type="moon" className="z-0" />
       <BlackHole active={isColliding} position={blackHolePosition} onReset={() => setIsColliding(false)} />
     </motion.div>
   );
