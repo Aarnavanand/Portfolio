@@ -52,9 +52,9 @@ function Layout() {
   };
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground">
+    <div className="relative z-50 min-h-screen bg-background text-foreground">
       <SpaceBackground />
-      <SpaceObjects setIsBlackHoleActive={setIsBlackHoleActive} />
+      <SpaceObjects setIsBlackHoleActive={setIsBlackHoleActive} className="fixed inset-0 z-0" />
       
       {/* Black Hole Component */}
       <BlackHole active={isBlackHoleActive} onReset={() => setIsBlackHoleActive(false)} position={{
@@ -302,4 +302,3 @@ function Layout() {
 }
 
 export default Layout;
-
