@@ -1,4 +1,4 @@
-import { MotionValue, useSpring, useTransform } from 'framer-motion';
+import { MotionValue, useTransform } from 'framer-motion';
 
 // Animation presets for consistent motion across components
 export const motionPresets = {

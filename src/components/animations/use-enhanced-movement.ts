@@ -23,7 +23,6 @@ export function useEnhancedMovement(config: MovementConfig = {}) {
     damping = motionPresets.spaceObject.spring.damping,
     orbitRadius = 100,
     orbitSpeed = 0.001,
-    avoidanceRadius = 150,
   } = config;
 
   const x = useMotionValue(0);
@@ -31,7 +30,7 @@ export function useEnhancedMovement(config: MovementConfig = {}) {
   const targetX = useMotionValue(0);
   const targetY = useMotionValue(0);
   const time = useRef(0);
-  const frame = useRef<number>();
+  const frame = useRef<number | undefined>(undefined);
 
   // Spring animations for smooth movement
   const springX = useSpring(x, { mass, stiffness, damping });
@@ -65,20 +64,12 @@ export function useEnhancedMovement(config: MovementConfig = {}) {
 
     frame.current = requestAnimationFrame(animate);
     return () => {
-      if (frame.current) cancelAnimationFrame(frame.current);
+      if (frame.current) {
+        cancelAnimationFrame(frame.current);
+        frame.current = undefined;
+      }
     };
   }, []);
-
-  // Screen edge detection and avoidance
-  const checkBounds = (value: number, min: number, max: number) => {
-    if (value < min + avoidanceRadius) {
-      return min + avoidanceRadius;
-    }
-    if (value > max - avoidanceRadius) {
-      return max - avoidanceRadius;
-    }
-    return value;
-  };
 
   // Transform spring values for visual effects
   const scale = useTransform(
@@ -106,9 +97,9 @@ export function useEnhancedMovement(config: MovementConfig = {}) {
     rotation,
     blur,
     particles,
-    setTarget: (x: number, y: number) => {
-      targetX.set(x);
-      targetY.set(y);
+    setTarget: (newX: number, newY: number) => {
+      x.set(newX);
+      y.set(newY);
     },
   };
 }

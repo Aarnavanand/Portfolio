@@ -1,4 +1,3 @@
-import { theme } from './theme-config';
 
 // Base component styles
 export const componentStyles = {
