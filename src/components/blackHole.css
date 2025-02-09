@@ -1,0 +1,215 @@
+/* Base Container */
+.black-hole-container {
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 50;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Star Field */
+  .star-field {
+    position: absolute;
+    inset: 0;
+    perspective: 1000px;
+  }
+  
+  .stars {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    left: var(--x);
+    top: var(--y);
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--duration) ease-in-out infinite;
+    filter: blur(0.5px);
+  }
+  
+  /* Black Hole Structure */
+  .black-hole-wrapper {
+    position: relative;
+    width: min(90vw, 600px);
+    height: min(90vw, 600px);
+    transform-style: preserve-3d;
+  }
+  
+  /* Event Horizon */
+  .event-horizon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 25%;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 5;
+  }
+  
+  .event-horizon-inner {
+    position: absolute;
+    inset: 0;
+    background: black;
+    border-radius: 50%;
+    box-shadow: 
+      0 0 50px 10px rgba(0, 0, 0, 0.9),
+      0 0 100px 20px rgba(0, 0, 0, 0.7);
+  }
+  
+  .event-horizon-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.1),
+      transparent 70%
+    );
+    filter: blur(10px);
+  }
+  
+  /* Accretion Disk */
+  /* .accretion-disk-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.1s linear;
+  }
+  
+  .accretion-disk-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) 
+               rotate3d(1, 0, 0, calc(var(--layer) * 5deg))
+               scale(calc(1 - var(--layer) * 0.1));
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 69, 0, 0.2) 20%,
+      rgba(255, 165, 0, 0.6) 40%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 165, 0, 0.6) 60%,
+      rgba(255, 69, 0, 0.2) 80%,
+      transparent
+    );
+    border-radius: 50%;
+    opacity: calc(1 - var(--layer) * 0.15);
+    filter: blur(8px);
+  }
+   */
+  /* Gravitational Effects */
+  .gravitational-trails-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    transition: transform 0.1s linear;
+  }
+  
+  .gravitational-trail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: var(--length);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, var(--opacity)),
+      transparent
+    );
+    transform-origin: top;
+    transform: rotate(var(--angle)) translateY(60px);
+    filter: blur(1px);
+  }
+  
+  /* Light Distortion */
+  .light-distortion-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) 
+               scale(calc(1 + var(--ring) * 0.3));
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: pulse 3s ease-in-out infinite;
+    animation-delay: calc(var(--ring) * -1s);
+  }
+  
+  /* Outer Glow */
+  .outer-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 69, 0, 0.1),
+      transparent 70%
+    );
+    filter: blur(20px);
+  }
+  
+  /* Animations */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.3; }
+  }
+  
+  @keyframes pulse {
+    0% { 
+      transform: translate(-50%, -50%) 
+                 scale(calc(1 + var(--ring) * 0.3));
+      opacity: 0.5;
+    }
+    50% { 
+      transform: translate(-50%, -50%) 
+                 scale(calc(1.2 + var(--ring) * 0.3));
+      opacity: 0.3;
+    }
+    100% { 
+      transform: translate(-50%, -50%) 
+                 scale(calc(1 + var(--ring) * 0.3));
+      opacity: 0.5;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .black-hole-wrapper {
+      width: min(90vw, 400px);
+      height: min(90vw, 400px);
+    }
+  
+    .event-horizon {
+      width: 30%;
+      height: 30%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .black-hole-wrapper {
+      width: min(90vw, 300px);
+      height: min(90vw, 300px);
+    }
+  
+    .event-horizon {
+      width: 35%;
+      height: 35%;
+    }
+  }

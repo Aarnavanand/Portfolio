@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263.4 70% 50.4%;
+    --radius: 0.75rem;
+  }
+ 
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .animate-twinkle {
+    animation: twinkle var(--duration, 3s) ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+  
+  .animate-bounce {
+    animation: bounce 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) infinite;
+  }
+  
+  .animate-bounce-delayed {
+    animation: bounce 0.5s cubic-bezier(0.36, 0, 0.66, -0.56) infinite;
+    animation-delay: 0.25s;
+  }
+
+  .animate-black-hole-spin {
+    animation: black-hole-spin 4s linear infinite;
+  }
+
+  .animate-black-hole-disk {
+    animation: black-hole-disk 8s linear infinite;
+  }
+
+  .animate-gravitational-wave {
+    animation: gravitational-wave 3s ease-out infinite;
+  }
+
+  .animate-light-distortion {
+    animation: light-distortion 4s ease-in-out infinite;
+  }
+
+  .animate-pull-to-center {
+    animation: pull-to-center 30s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: var(--opacity, 1);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.7);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes black-hole-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes black-hole-disk {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(-360deg) scale(0.8);
+  }
+}
+
+@keyframes gravitational-wave {
+  0% {
+    transform: scale(0.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes light-distortion {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+}
+
+@keyframes pull-to-center {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(0) rotate(720deg);
+  }
+}
