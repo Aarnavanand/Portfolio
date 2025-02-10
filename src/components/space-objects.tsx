@@ -3,7 +3,12 @@ import { motion } from 'framer-motion';
 import EnhancedSpaceObject from './enhanced-space-object';
 import { BlackHole } from './BlackHole';
 
-export function SpaceObjects({ setIsBlackHoleActive }: { setIsBlackHoleActive: (active: boolean) => void }) {
+interface SpaceObjectsProps {
+  setIsBlackHoleActive: (active: boolean) => void;
+  className?: string;
+}
+
+export function SpaceObjects({ setIsBlackHoleActive, className }: SpaceObjectsProps) {
   const astronautRef = useRef<HTMLDivElement>(null);
   const moonRef = useRef<HTMLDivElement>(null);
   const [isColliding, setIsColliding] = useState<boolean>(false);
@@ -58,7 +63,7 @@ export function SpaceObjects({ setIsBlackHoleActive }: { setIsBlackHoleActive: (
   }, [checkCollision]);
 
   return (
-    <motion.div className="fixed inset-0 overflow-hidden">
+    <motion.div className={`fixed inset-0 overflow-hidden ${className}`}>
       <EnhancedSpaceObject ref={astronautRef} type="astronaut" className="z-0" />
       <EnhancedSpaceObject ref={moonRef} type="moon" className="z-0" />
       <BlackHole active={isColliding} position={blackHolePosition} onReset={() => setIsColliding(false)} />

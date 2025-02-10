@@ -56,7 +56,7 @@ const Footer = () => {
   );
 };
 
-const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, label: string }) => {
+const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: React.ComponentType, label: string }) => {
   return (
     <a
       href={href}
@@ -65,7 +65,7 @@ const SocialLink = ({ href, icon: Icon, label }: { href: string, icon: any, labe
       className="flex items-center justify-center h-12 w-12 border-2 border-gray-600 rounded-full bg-gray-800 hover:bg-primary hover:border-primary transition-all duration-300 transform hover:scale-110 shadow-md"
       aria-label={label}
     >
-      <Icon className="h-6 w-6 text-white" />
+      <Icon/>
     </a>
   );
 };

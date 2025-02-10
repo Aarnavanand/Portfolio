@@ -2,9 +2,9 @@ import { useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, ChevronLeft, ChevronRight,  Globe } from "lucide-react";
-// BrainCircuit
+import { ExternalLink, Github, ChevronLeft, ChevronRight, Globe } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import { motion } from "framer-motion";
 
@@ -23,50 +23,15 @@ type ProjectCategories = {
 };
 
 type Sliders = {
-  [key: string]: React.RefObject<any>;
+  [key: string]: React.MutableRefObject<SwiperClass | null>;
 };
 
 // Mapping category names to icons
 const categoryIcons: { [key: string]: React.ElementType } = {
-  // "AI/ML Projects": BrainCircuit,
   "Web Projects": Globe
 };
 
 const projectCategories: ProjectCategories = {
-  // "AI/ML Projects": [
-  //   {
-  //     title: "AI Chatbot 1",
-  //     description: "A chatbot powered by GPT models",
-  //     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
-  //     tags: ["Python", "TensorFlow", "ChatGPT API"],
-  //     demoUrl: "#",
-  //     githubUrl: "#",
-  //   },
-  //   {
-  //     title: "AI Chatbot 1",
-  //     description: "A chatbot powered by GPT models",
-  //     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
-  //     tags: ["Python", "TensorFlow", "ChatGPT API"],
-  //     demoUrl: "#",
-  //     githubUrl: "#",
-  //   },
-  //   {
-  //     title: "AI Chatbot 1",
-  //     description: "A chatbot powered by GPT models",
-  //     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
-  //     tags: ["Python", "TensorFlow", "ChatGPT API"],
-  //     demoUrl: "#",
-  //     githubUrl: "#",
-  //   },
-  //   {
-  //     title: "AI Chatbot 1",
-  //     description: "A chatbot powered by GPT models",
-  //     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop&q=80",
-  //     tags: ["Python", "TensorFlow", "ChatGPT API"],
-  //     demoUrl: "#",
-  //     githubUrl: "#",
-  //   },
-  // ],
   "Web Projects": [
     {
       title: "Cosmic Chat 1",
@@ -77,26 +42,42 @@ const projectCategories: ProjectCategories = {
       githubUrl: "#",
     },
     {
-      title: "Cosmic Chat 1",
-      description: "Real-time chat application with space-themed UI",
+      title: "Cosmic Chat 2",
+      description: "A futuristic social media platform",
       image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["React", "Node.js", "WebSocket", "Tailwind"],
+      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
       demoUrl: "#",
       githubUrl: "#",
     },
     {
-      title: "Cosmic Chat 1",
-      description: "Real-time chat application with space-themed UI",
+      title: "Cosmic Chat 2",
+      description: "A futuristic social media platform",
       image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["React", "Node.js", "WebSocket", "Tailwind"],
+      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
       demoUrl: "#",
       githubUrl: "#",
     },
     {
-      title: "Cosmic Chat 1",
-      description: "Real-time chat application with space-themed UI",
+      title: "Cosmic Chat 2",
+      description: "A futuristic social media platform",
       image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["React", "Node.js", "WebSocket", "Tailwind"],
+      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
+      demoUrl: "#",
+      githubUrl: "#",
+    },
+    {
+      title: "Cosmic Chat 2",
+      description: "A futuristic social media platform",
+      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
+      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
+      demoUrl: "#",
+      githubUrl: "#",
+    },
+    {
+      title: "Cosmic Chat 2",
+      description: "A futuristic social media platform",
+      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
+      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
       demoUrl: "#",
       githubUrl: "#",
     },
@@ -115,8 +96,9 @@ const cardVariants = {
 };
 
 export function ProjectsSection() {
+  // Create references for Swiper instances
   const sliders: Sliders = Object.keys(projectCategories).reduce((acc, key) => {
-    acc[key] = useRef(null);
+    acc[key] = useRef<SwiperClass | null>(null);
     return acc;
   }, {} as Sliders);
 
@@ -142,14 +124,14 @@ export function ProjectsSection() {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => sliders[category].current?.swiper?.slidePrev()}
+                    onClick={() => sliders[category].current?.slidePrev()}
                   >
                     <ChevronLeft className="h-5 w-5" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => sliders[category].current?.swiper?.slideNext()}
+                    onClick={() => sliders[category].current?.slideNext()}
                   >
                     <ChevronRight className="h-5 w-5" />
                   </Button>
@@ -157,7 +139,7 @@ export function ProjectsSection() {
               </div>
 
               <Swiper
-                ref={sliders[category]}
+                onSwiper={(swiper) => (sliders[category].current = swiper)}
                 spaceBetween={16}
                 slidesPerView={1.2}
                 breakpoints={{

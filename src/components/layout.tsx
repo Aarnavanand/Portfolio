@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import {
-  // Rocket,
   Menu,
   X,
   User,
@@ -67,21 +66,20 @@ function Layout() {
         initial={{ y: 0 }}
         animate={{ y: isScrolled ? -2 : 0 }}
         className={cn(
-          "fixed top-0 w-full border-b z-50 transition-all duration-300 px-6 md:px-20 rounded-full backdrop-filter",
+          "fixed top-0 w-full border-b z-50 transition-all duration-300 px-4 sm:px-6 md:px-20 rounded-full backdrop-filter",
           isScrolled
             ? "bg-background/95 backdrop-blur-2xl shadow-lg"
             : "bg-background/80 backdrop-blur-xl"
         )}
       >
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container mx-auto max-w-screen-xl flex h-16 items-center justify-between">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-3"
           >
             <div className="relative">
-              {/* <img  /> */}
-              <img src="/Asset3.svg" alt="" className="h-14 w-14 text-primary"/>
+              <img src="/Asset3.svg" alt="" className="h-10 w-10 sm:h-14 sm:w-14 text-primary"/>
               <motion.div
                 animate={{
                   scale: [1, 1.2, 1],
@@ -94,9 +92,6 @@ function Layout() {
                 className="absolute inset-0 rounded-full bg-primary/20 blur-sm"
               />
             </div>
-            {/* <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight">Aarnav Anand</span>
-            </div> */}
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -234,57 +229,57 @@ function Layout() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="container mt-16 py-16 relative z-10 px-6 md:px-20">
-      <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
-      <motion.div
-      className="space-y-6 text-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-    >
-      <h1
-        className="text-4xl font-bold sm:text-6xl bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent"
-        style={{
-          backgroundImage: `url('/textures/noise.png'), linear-gradient(to right, #6366F1, #9333EA)`,
-          backgroundSize: "200px, cover",
-          backgroundBlendMode: "overlay",
-        }}
-      >
-        Hey, I'm Aarnav Anand
-      </h1>
+      <main className="container mx-auto max-w-screen-xl mt-16 py-16 relative z-10 px-4 sm:px-6 md:px-20">
+        <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
+          <motion.div
+            className="space-y-6 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent"
+              style={{
+                backgroundImage: `url('/textures/noise.png'), linear-gradient(to right, #6366F1, #9333EA)`,
+                backgroundSize: "200px, cover",
+                backgroundBlendMode: "overlay",
+              }}
+            >
+              Hey, I'm Aarnav Anand
+            </h1>
 
-      <motion.p
-        className="text-lg text-muted-foreground sm:text-xl max-w-3xl mx-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 1 }}
-      >
-       A full-stack developer and an undergraduate student, crafting immersive digital experiences—one project at a time.
-      </motion.p>
+            <motion.p
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+            >
+              A full-stack developer and an undergraduate student, crafting immersive digital experiences—one project at a time.
+            </motion.p>
 
-      <motion.div
-        className="flex justify-center gap-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-      >
-        <Button
-          size="lg"
-          asChild
-          className="hover:shadow-lg hover:shadow-primary/50 transition duration-300"
-        >
-          <a href="#projects">Explore My Universe</a>
-        </Button>
-        <Button
-          size="lg"
-          variant="outline"
-          asChild
-          className="hover:shadow-lg hover:shadow-purple-500/50 transition duration-300"
-        >
-          <a href="#contact">Let's Connect</a>
-        </Button>
-        </motion.div>
-        </motion.div>
+            <motion.div
+              className="flex justify-center gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1, duration: 1 }}
+            >
+              <Button
+                size="lg"
+                asChild
+                className="hover:shadow-lg hover:shadow-primary/50 transition duration-300"
+              >
+                <a href="#projects">Explore My Universe</a>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                asChild
+                className="hover:shadow-lg hover:shadow-purple-500/50 transition duration-300"
+              >
+                <a href="#contact">Let's Connect</a>
+              </Button>
+            </motion.div>
+          </motion.div>
         </section>
 
         <div className="space-y-28">
@@ -294,7 +289,7 @@ function Layout() {
           <SkillsSection />
           <CertificationsSection />
           <ContactSection />
-          <Footer/>
+          <Footer />
         </div>
       </main>
     </div>

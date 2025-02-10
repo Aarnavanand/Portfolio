@@ -1,16 +1,15 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useState, useEffect, useRef, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
-import React, { memo, useCallback } from 'react';
-import { Suspense, lazy } from 'react';
+import { memo, useCallback } from 'react';
+import { Suspense } from 'react';
 
+import { BlackHole } from './BlackHole';
 
 interface EnhancedSpaceObjectProps {
   type: 'astronaut' | 'moon';
   className?: string;
 }
-
-const BlackHole = lazy(() => import('./black-hole'));
 
 const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>(({ type, className }, ref) => {
   const [showBlackHole, setShowBlackHole] = useState(false);
@@ -29,7 +28,7 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
 
   const size = 150;
 
-  const updatePosition = () => {
+  const updatePosition = useCallback(() => {
     let newX = x.get() + velocity.current.x;
     let newY = y.get() + velocity.current.y;
 
@@ -47,11 +46,11 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
     y.set(newY);
 
     requestAnimationFrame(updatePosition);
-  };
+  }, [x, y, size, velocity]);
 
   useEffect(() => {
     requestAnimationFrame(updatePosition);
-  }, []);
+  }, [updatePosition]);
 
   return (
     <>
