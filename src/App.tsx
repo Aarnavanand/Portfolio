@@ -1,13 +1,16 @@
-import { ThemeProvider } from '@/components/theme-provider';
+import { BrowserRouter } from 'react-router-dom';
 import Layout from '@/components/layout';
+import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="space-portfolio-theme">
-      <Layout />
-      <Toaster />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider defaultTheme="dark" storageKey="space-portfolio-theme">
+        <Layout />
+        <Toaster />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

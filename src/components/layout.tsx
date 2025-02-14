@@ -9,7 +9,6 @@ import {
   Lightbulb,
   GraduationCap,
   Mail,
-  ChevronRight,
   Star,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -24,6 +23,8 @@ import { ContactSection } from '@/components/sections/contact';
 import { BlackHole } from '@/components/BlackHole';
 import { cn } from '@/lib/utils';
 import Footer from '@/components/sections/Footer';
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,8 +47,14 @@ function Layout() {
     });
   }, [scrollY]);
 
-  const handleNavClick = () => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
     setIsMenuOpen(false);
+    
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -108,15 +115,21 @@ function Layout() {
                   className="relative group px-4"
                   asChild
                 >
-                  <a href={item.href}>
-                    <item.icon className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
+                  <Link 
+                    to={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="flex items-center"
+                  >
+                    {React.createElement(item.icon, { 
+                      className: "w-4 h-4 mr-2 group-hover:text-primary transition-colors" 
+                    })}
                     {item.label}
                     <motion.div
                       className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary"
                       whileHover={{ width: '100%' }}
                       transition={{ duration: 0.2 }}
                     />
-                  </a>
+                  </Link>
                 </Button>
               </motion.div>
             ))}
@@ -204,20 +217,24 @@ function Layout() {
                         variant="ghost"
                         className="w-full justify-between group hover:bg-primary/10"
                         asChild
-                        onClick={handleNavClick}
                       >
-                        <a href={item.href} className="relative">
+                        <Link 
+                          to={item.href}
+                          onClick={(e) => handleNavClick(e, item.href)}
+                          className="relative"
+                        >
                           <span className="flex items-center gap-3">
-                            <item.icon className="h-5 w-5 text-primary" />
+                            {React.createElement(item.icon, { 
+                              className: "h-5 w-5 text-primary" 
+                            })}
                             {item.label}
                           </span>
-                          <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                           <motion.div
                             className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary"
                             whileHover={{ width: '100%' }}
                             transition={{ duration: 0.2 }}
                           />
-                        </a>
+                        </Link>
                       </Button>
                     </motion.div>
                   ))}
@@ -229,7 +246,7 @@ function Layout() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="container mx-auto max-w-screen-xl mt-16 py-16 relative z-10 px-4 sm:px-6 md:px-20">
+      <main className="container mx-auto max-w-screen-xl py-16 relative z-10 px-4 sm:px-6 md:px-20">
         <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
           <motion.div
             className="space-y-6 text-center"
@@ -268,7 +285,12 @@ function Layout() {
                 asChild
                 className="hover:shadow-lg hover:shadow-primary/50 transition duration-300"
               >
-                <a href="#projects">Explore My Universe</a>
+                <Link 
+                  to="#projects"
+                  onClick={(e) => handleNavClick(e, '#projects')}
+                >
+                  Explore My Universe
+                </Link>
               </Button>
               <Button
                 size="lg"
@@ -276,19 +298,36 @@ function Layout() {
                 asChild
                 className="hover:shadow-lg hover:shadow-purple-500/50 transition duration-300"
               >
-                <a href="#contact">Let's Connect</a>
+                <Link 
+                  to="#contact"
+                  onClick={(e) => handleNavClick(e, '#contact')}
+                >
+                  Let's Connect
+                </Link>
               </Button>
             </motion.div>
           </motion.div>
         </section>
 
-        <div className="space-y-28">
-          <AboutSection />
-          <ProjectsSection />
-          <AchievementsSection />
-          <SkillsSection />
-          <CertificationsSection />
-          <ContactSection />
+        <div className="space-y-16">
+          <div id="about">
+            <AboutSection />
+          </div>
+          <div id="projects">
+            <ProjectsSection />
+          </div>
+          <div id="achievements">
+            <AchievementsSection />
+          </div>
+          <div id="skills">
+            <SkillsSection />
+          </div>
+          <div id="certifications">
+            <CertificationsSection />
+          </div>
+          <div id="contact">
+            <ContactSection />
+          </div>
           <Footer />
         </div>
       </main>

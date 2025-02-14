@@ -179,3 +179,15 @@
     transform: scale(0) rotate(720deg);
   }
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Add padding for fixed header */
+}
+
+/* Optional: Add smooth scrolling for Safari */
+@supports (-webkit-overflow-scrolling: touch) {
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+} 
