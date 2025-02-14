@@ -14,122 +14,133 @@ interface EnhancedSpaceObjectProps {
 const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectProps>(({ type, className }, ref) => {
   const [showBlackHole, setShowBlackHole] = useState(false);
   
-  // Use a ref for viewport to avoid unnecessary re-renders
+  // Viewport state with breakpoint awareness
   const viewportRef = useRef({
     width: typeof window !== 'undefined' ? window.innerWidth : 1200,
-    height: typeof window !== 'undefined' ? window.innerHeight : 800
+    height: typeof window !== 'undefined' ? window.innerHeight : 800,
+    isLargeScreen: typeof window !== 'undefined' ? window.innerWidth >= 1024 : true
   });
 
-  // Optimize initial position calculation
-  const initialX = useRef(Math.random() * (viewportRef.current.width * 0.5) + viewportRef.current.width * 0.25);
-  const initialY = useRef(Math.random() * (viewportRef.current.height * 0.5) + viewportRef.current.height * 0.25);
-
-  const x = useMotionValue(initialX.current);
-  const y = useMotionValue(initialY.current);
-
-  // Further optimized spring configuration
-  const springConfig = { 
-    stiffness: 50,
-    damping: 20,
-    mass: 1,
-    restSpeed: 0.001
+  // Adjust movement based on screen size
+  const getVelocityScale = () => {
+    const { width } = viewportRef.current;
+    if (width >= 1536) return 0.15; // 2xl
+    if (width >= 1280) return 0.2;  // xl
+    if (width >= 1024) return 0.25; // lg
+    if (width >= 768) return 0.3;   // md
+    return 0.35;                    // sm and below
   };
-  
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
 
-  // More stable velocity
+  // Enhanced initial position calculation
+  const calculateInitialPosition = () => {
+    const { width, height, isLargeScreen } = viewportRef.current;
+    const padding = isLargeScreen ? 100 : 50;
+    
+    return {
+      x: Math.random() * (width - padding * 2) + padding,
+      y: Math.random() * (height - padding * 2) + padding
+    };
+  };
+
+  const initialPosition = useRef(calculateInitialPosition());
+  const x = useMotionValue(initialPosition.current.x);
+  const y = useMotionValue(initialPosition.current.y);
+
+  // Optimized spring configuration based on screen size
+  const getSpringConfig = () => {
+    const { isLargeScreen } = viewportRef.current;
+    return {
+      stiffness: isLargeScreen ? 40 : 50,
+      damping: isLargeScreen ? 15 : 20,
+      mass: isLargeScreen ? 1.2 : 1,
+      restSpeed: 0.001
+    };
+  };
+
+  const springX = useSpring(x, getSpringConfig());
+  const springY = useSpring(y, getSpringConfig());
+
+  // Enhanced velocity with screen-size awareness
   const velocity = useRef({
-    x: (Math.random() * 2 - 1) * 0.2,
-    y: (Math.random() * 2 - 1) * 0.2
+    x: (Math.random() * 2 - 1) * getVelocityScale(),
+    y: (Math.random() * 2 - 1) * getVelocityScale()
   });
 
   const size = useRef(150);
   const animationFrameRef = useRef<number>();
   const isMoving = useRef(true);
 
-  // Optimized resize handler with throttling
+  // Enhanced resize handler
   useEffect(() => {
-    let resizeTimeout: NodeJS.Timeout;
-    let lastUpdate = 0;
-    const throttleDelay = 100;
-
     const handleResize = () => {
-      const now = Date.now();
-      if (now - lastUpdate >= throttleDelay) {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          viewportRef.current = {
-            width: window.innerWidth,
-            height: window.innerHeight
-          };
-          // Ensure object stays in bounds after resize
-          const currentX = x.get();
-          const currentY = y.get();
-          const padding = size.current / 2;
-          
-          if (currentX < padding || currentX > viewportRef.current.width - size.current - padding) {
-            x.set(Math.max(padding, Math.min(currentX, viewportRef.current.width - size.current - padding)));
-          }
-          if (currentY < padding || currentY > viewportRef.current.height - size.current - padding) {
-            y.set(Math.max(padding, Math.min(currentY, viewportRef.current.height - size.current - padding)));
-          }
-        }, throttleDelay);
-        lastUpdate = now;
-      }
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const isLargeScreen = width >= 1024;
+
+      viewportRef.current = { width, height, isLargeScreen };
+
+      // Adjust velocity for new screen size
+      const velocityScale = getVelocityScale();
+      velocity.current = {
+        x: (velocity.current.x / Math.abs(velocity.current.x)) * velocityScale,
+        y: (velocity.current.y / Math.abs(velocity.current.y)) * velocityScale
+      };
+
+      // Create new springs with updated config instead of updating existing ones
+      x.set(x.get());
+      y.set(y.get());
     };
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('visibilitychange', handleVisibilityChange);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('visibilitychange', handleVisibilityChange);
-      clearTimeout(resizeTimeout);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, [x, y]);
 
-  // Handle page visibility
-  const handleVisibilityChange = useCallback(() => {
-    isMoving.current = !document.hidden;
-    if (isMoving.current && !animationFrameRef.current) {
-      animationFrameRef.current = requestAnimationFrame(updatePosition);
-    }
-  }, []);
-
+  // Enhanced movement logic
   const updatePosition = useCallback(() => {
     if (!isMoving.current) return;
 
+    const { width, height, isLargeScreen } = viewportRef.current;
+    const padding = isLargeScreen ? 100 : 50;
+    
     let newX = x.get() + velocity.current.x;
     let newY = y.get() + velocity.current.y;
 
-    const padding = size.current / 2;
-    const maxX = viewportRef.current.width - size.current - padding;
-    const maxY = viewportRef.current.height - size.current - padding;
-
-    // Improved boundary detection with bounce effect
-    if (newX < padding || newX > maxX) {
+    // Enhanced boundary detection with padding
+    if (newX < padding || newX > width - size.current - padding) {
       velocity.current.x *= -0.95; // Add slight dampening on bounce
-      newX = Math.max(padding, Math.min(newX, maxX));
+      newX = Math.max(padding, Math.min(newX, width - size.current - padding));
+      
+      // Add slight random variation on bounce
+      if (isLargeScreen) {
+        velocity.current.y += (Math.random() - 0.5) * 0.1;
+      }
     }
-    if (newY < padding || newY > maxY) {
-      velocity.current.y *= -0.95; // Add slight dampening on bounce
-      newY = Math.max(padding, Math.min(newY, maxY));
+
+    if (newY < padding || newY > height - size.current - padding) {
+      velocity.current.y *= -0.95;
+      newY = Math.max(padding, Math.min(newY, height - size.current - padding));
+      
+      if (isLargeScreen) {
+        velocity.current.x += (Math.random() - 0.5) * 0.1;
+      }
+    }
+
+    // Add subtle random movement variations based on screen size
+    if (!isLargeScreen) {
+      velocity.current.x += (Math.random() - 0.5) * 0.03;
+      velocity.current.y += (Math.random() - 0.5) * 0.03;
+    }
+
+    // Normalize velocity to maintain consistent speed
+    const speed = Math.sqrt(velocity.current.x ** 2 + velocity.current.y ** 2);
+    const maxSpeed = getVelocityScale() * 1.5;
+    if (speed > maxSpeed) {
+      velocity.current.x *= maxSpeed / speed;
+      velocity.current.y *= maxSpeed / speed;
     }
 
     x.set(newX);
     y.set(newY);
-
-    // Add slight random variation to movement
-    velocity.current.x += (Math.random() - 0.5) * 0.01;
-    velocity.current.y += (Math.random() - 0.5) * 0.01;
-
-    // Normalize velocity to maintain consistent speed
-    const speed = Math.sqrt(velocity.current.x ** 2 + velocity.current.y ** 2);
-    if (speed > 0.4) {
-      velocity.current.x *= 0.4 / speed;
-      velocity.current.y *= 0.4 / speed;
-    }
 
     animationFrameRef.current = requestAnimationFrame(updatePosition);
   }, [x, y]);
