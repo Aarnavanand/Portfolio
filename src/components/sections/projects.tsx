@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useMemo, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
 import { motion } from "framer-motion";
+import { sharedAnimationVariants } from "@/lib/animation-variants";
 
 // Define the type for project categories
 type ProjectCategory = {
@@ -20,10 +21,6 @@ type ProjectCategory = {
 
 type ProjectCategories = {
   [key: string]: ProjectCategory[];
-};
-
-type Sliders = {
-  [key: string]: React.MutableRefObject<SwiperClass | null>;
 };
 
 // Mapping category names to icons
@@ -84,23 +81,29 @@ const projectCategories: ProjectCategories = {
   ],
 };
 
-// Define animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-};
-
-const cardVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
-};
-
 export function ProjectsSection() {
-  // Create references for Swiper instances
-  const sliders: Sliders = Object.keys(projectCategories).reduce((acc, key) => {
-    acc[key] = useRef<SwiperClass | null>(null);
-    return acc;
-  }, {} as Sliders);
+  // 1. First, declare all hooks at the top level
+  const swiperRefs = useRef<{ [key: string]: SwiperClass | null }>({});
+
+  // 2. Memoize the categories
+  const categories = useMemo(() => Object.keys(projectCategories), []);
+
+  // 3. Memoize slide navigation handler
+  const handleSlideNav = useCallback((direction: 'prev' | 'next', category: string) => {
+    const swiper = swiperRefs.current[category];
+    if (!swiper) return;
+    
+    if (direction === 'prev') {
+      swiper.slidePrev();
+    } else {
+      swiper.slideNext();
+    }
+  }, []);
+
+  // 4. Memoize swiper initialization handler
+  const handleSwiperInit = useCallback((swiper: SwiperClass, category: string) => {
+    swiperRefs.current[category] = swiper;
+  }, []);
 
   return (
     <section id="projects" className="scroll-mt-16">
@@ -108,9 +111,10 @@ export function ProjectsSection() {
         className="space-y-8"
         initial="hidden"
         whileInView="visible"
-        variants={containerVariants}
+        variants={sharedAnimationVariants.containerVariants}
       >
-        {Object.entries(projectCategories).map(([category, projects]) => {
+        {categories.map((category) => {
+          const projects = projectCategories[category];
           const Icon = categoryIcons[category] || Globe;
 
           return (
@@ -124,14 +128,14 @@ export function ProjectsSection() {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => sliders[category].current?.slidePrev()}
+                    onClick={() => handleSlideNav('prev', category)}
                   >
                     <ChevronLeft className="h-5 w-5" />
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => sliders[category].current?.slideNext()}
+                    onClick={() => handleSlideNav('next', category)}
                   >
                     <ChevronRight className="h-5 w-5" />
                   </Button>
@@ -139,7 +143,7 @@ export function ProjectsSection() {
               </div>
 
               <Swiper
-                onSwiper={(swiper) => (sliders[category].current = swiper)}
+                onSwiper={(swiper) => handleSwiperInit(swiper, category)}
                 spaceBetween={16}
                 slidesPerView={1.2}
                 breakpoints={{
@@ -150,7 +154,7 @@ export function ProjectsSection() {
               >
                 {projects.map((project, index) => (
                   <SwiperSlide key={`${project.title}-${index}`}>
-                    <motion.div key={project.title} variants={cardVariants}>
+                    <motion.div variants={sharedAnimationVariants.cardVariants}>
                       <Card className="group relative overflow-hidden border bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10" />
                         <div className="relative">

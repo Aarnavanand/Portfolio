@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 // import { progressVariants } from '@/components/ui/progress';
@@ -9,6 +9,7 @@ import {
   Terminal,
   Sparkles,
 } from 'lucide-react';
+import { debounce } from 'lodash';
 
 const skills = [
   {
@@ -94,6 +95,23 @@ const progressVariants = {
 
 export function SkillsSection() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  
+  // Memoize skill items to prevent unnecessary re-renders
+  const skillItems = useMemo(() => skills.map(category => ({
+    ...category,
+    items: category.items.map(skill => ({
+      ...skill,
+      isHovered: hoveredSkill === skill.name
+    }))
+  })), [hoveredSkill]);
+
+  // Debounced hover handler
+  const debouncedSetHoveredSkill = useCallback(
+    debounce((skillName: string | null) => {
+      setHoveredSkill(skillName);
+    }, 50),
+    []
+  );
 
   return (
     <section id="skills" className="scroll-mt-16 py-16">
@@ -120,7 +138,7 @@ export function SkillsSection() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2  mx-auto ">
-          {skills.map((category) => (
+          {skillItems.map((category) => (
             <motion.div key={category.category} variants={cardVariants}>
               <Card className="relative overflow-hidden border bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60 group hover:shadow-lg transition-shadow duration-300">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 opacity-50 group-hover:opacity-70 transition-opacity" />
@@ -140,13 +158,13 @@ export function SkillsSection() {
                       <motion.div
                         key={skill.name}
                         className="space-y-2"
-                        onHoverStart={() => setHoveredSkill(skill.name)}
-                        onHoverEnd={() => setHoveredSkill(null)}
+                        onHoverStart={() => debouncedSetHoveredSkill(skill.name)}
+                        onHoverEnd={() => debouncedSetHoveredSkill(null)}
                       >
                         <div className="flex justify-between text-sm">
                           <span className="font-medium">{skill.name}</span>
                           <span className={`transition-colors duration-200 ${
-                            hoveredSkill === skill.name ? 'text-primary' : 'text-muted-foreground'
+                            skill.isHovered ? 'text-primary' : 'text-muted-foreground'
                           }`}>
                             {skill.level}%
                           </span>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import {
   Menu,
@@ -26,36 +26,44 @@ import Footer from '@/components/sections/Footer';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-function Layout() {
+export function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollY } = useScroll();
   const [isBlackHoleActive, setIsBlackHoleActive] = useState(false);
 
-  const navItems = [
+  // Memoize scroll handler
+  const handleScroll = useCallback((latest: number) => {
+    setIsScrolled(latest > 0);
+  }, []);
+
+  useEffect(() => {
+    return scrollY.on("change", handleScroll);
+  }, [scrollY, handleScroll]);
+
+  // Optimize navigation click handler
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }, []);
+
+  // Memoize nav items
+  const navItems = useMemo(() => [
     { href: '#about', label: 'About', icon: User },
     { href: '#projects', label: 'Projects', icon: FolderKanban },
     { href: '#achievements', label: 'Achievements', icon: Trophy },
     { href: '#skills', label: 'Skills', icon: Lightbulb },
     { href: '#certifications', label: 'Certifications', icon: GraduationCap },
     { href: '#contact', label: 'Contact', icon: Mail },
-  ];
-
-  useEffect(() => {
-    return scrollY.on("change", (latest) => {
-      setIsScrolled(latest > 0);
-    });
-  }, [scrollY]);
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  ], []);
 
   return (
     <div className="relative z-50 min-h-screen bg-background text-foreground">
@@ -334,5 +342,3 @@ function Layout() {
     </div>
   );
 }
-
-export default Layout;

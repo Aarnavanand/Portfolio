@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import EnhancedSpaceObject from './enhanced-space-object';
 import { BlackHole } from './BlackHole';
-import { cn } from '../lib/utils';
+import { cn } from '@/lib/utils';
 
 interface SpaceObjectsProps {
   setIsBlackHoleActive: (active: boolean) => void;
@@ -12,55 +12,69 @@ interface SpaceObjectsProps {
 export function SpaceObjects({ setIsBlackHoleActive, className }: SpaceObjectsProps) {
   const astronautRef = useRef<HTMLDivElement>(null);
   const moonRef = useRef<HTMLDivElement>(null);
-  const [isColliding, setIsColliding] = useState<boolean>(false);
-  const [blackHolePosition, setBlackHolePosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isColliding, setIsColliding] = useState(false);
+  const [blackHolePosition, setBlackHolePosition] = useState({ x: 0, y: 0 });
   const [lastCollisionTime, setLastCollisionTime] = useState<number | null>(null);
+  const collisionTimeoutRef = useRef<NodeJS.Timeout>();
 
-  // Collision Detection
   const checkCollision = useCallback(() => {
     if (!astronautRef.current || !moonRef.current) return;
 
     const astronautRect = astronautRef.current.getBoundingClientRect();
     const moonRect = moonRef.current.getBoundingClientRect();
 
-    const hasCollided = !(
-      astronautRect.right < moonRect.left ||
-      astronautRect.left > moonRect.right ||
-      astronautRect.bottom < moonRect.top ||
-      astronautRect.top > moonRect.bottom
+    // Improved collision detection with circular hitboxes
+    const astronautCenter = {
+      x: astronautRect.left + astronautRect.width / 2,
+      y: astronautRect.top + astronautRect.height / 2
+    };
+    const moonCenter = {
+      x: moonRect.left + moonRect.width / 2,
+      y: moonRect.top + moonRect.height / 2
+    };
+
+    const distance = Math.sqrt(
+      Math.pow(astronautCenter.x - moonCenter.x, 2) +
+      Math.pow(astronautCenter.y - moonCenter.y, 2)
     );
 
+    const collisionRadius = (astronautRect.width + moonRect.width) / 4;
+    const hasCollided = distance < collisionRadius;
+
     const currentTime = Date.now();
+    const cooldownPeriod = 60000;
 
-    if (hasCollided && !isColliding) {
-      if (lastCollisionTime === null || currentTime - lastCollisionTime >= 60000) {
-        setIsColliding(true);
-        setBlackHolePosition({
-          x: (astronautRect.left + moonRect.left) / 2,
-          y: (astronautRect.top + moonRect.top) / 2,
-        });
+    if (hasCollided && !isColliding && 
+        (!lastCollisionTime || currentTime - lastCollisionTime >= cooldownPeriod)) {
+      setIsColliding(true);
+      setBlackHolePosition({
+        x: (astronautCenter.x + moonCenter.x) / 2,
+        y: (astronautCenter.y + moonCenter.y) / 2
+      });
 
-        // Activate black hole effect
-        setIsBlackHoleActive(true);
-        setLastCollisionTime(currentTime);
+      setIsBlackHoleActive(true);
+      setLastCollisionTime(currentTime);
 
-        setTimeout(() => {
-          setIsBlackHoleActive(false);
-          setIsColliding(false);
-        }, 10000); // Reset after 10 seconds
+      if (collisionTimeoutRef.current) {
+        clearTimeout(collisionTimeoutRef.current);
       }
-    } else if (!hasCollided && isColliding) {
-      setIsColliding(false);
+
+      collisionTimeoutRef.current = setTimeout(() => {
+        setIsBlackHoleActive(false);
+        setIsColliding(false);
+      }, 10000);
     }
   }, [isColliding, lastCollisionTime, setIsBlackHoleActive]);
 
-  // Run collision detection at intervals
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      checkCollision();
-    }, 100); // Check for collisions every 100 milliseconds
-
-    return () => clearInterval(intervalId);
+    const intervalId = setInterval(checkCollision, 100);
+    
+    return () => {
+      clearInterval(intervalId);
+      if (collisionTimeoutRef.current) {
+        clearTimeout(collisionTimeoutRef.current);
+      }
+    };
   }, [checkCollision]);
 
   return (

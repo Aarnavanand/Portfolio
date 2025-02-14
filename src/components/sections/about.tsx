@@ -3,25 +3,34 @@ import { Badge } from '@/components/ui/badge';
 import { Rocket, Star, Code, Coffee, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { useState } from 'react';
+import { sharedAnimationVariants } from '@/lib/animation-variants';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-};
 
 const cardVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100, damping: 15 } },
 };
 
+// Add intersection observer options
+const sectionOptions = {
+  threshold: 0.1,
+  once: true,
+  margin: "-100px"
+};
+
 export function AboutSection() {
+  // Add error boundary
+  const [imageError, setImageError] = useState(false);
+
   return (
     <section id="about" className="scroll-mt-16 py-16">
       <motion.div
         className={cn("space-y-8")}
         initial="hidden"   // Initially hidden
         whileInView="visible"   // Becomes visible when scrolled into view
-        variants={containerVariants}  // Uses defined animation variants
+        viewport={sectionOptions}
+        variants={sharedAnimationVariants.containerVariants}  // Uses defined animation variants
       >
         <motion.div key="about-category" variants={cardVariants}>
           <div className="space-y-4 text-center">
@@ -44,9 +53,11 @@ export function AboutSection() {
             <motion.div variants={cardVariants} className="relative flex flex-col md:flex-row items-center gap-6">
               <div className="w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-primary shadow-lg">
                 <img
-                  src="/loveu.svg"
+                  src={imageError ? "/fallback-image.svg" : "/loveu.svg"}
                   alt="Profile"
                   className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+                  onError={() => setImageError(true)}
+                  loading="lazy"
                 />
               </div>
               <div className="flex-1 space-y-4 text-center md:text-left">

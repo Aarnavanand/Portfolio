@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,41 +15,40 @@ const containerVariants = {
 
 export function ContactSection() {
   const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // Debounced submit handler
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading) return;
+    
     setLoading(true);
-
     const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      subject: formData.get("subject"),
-      message: formData.get("message"),
-    };
-
+    
     try {
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      
+      // Validate data before sending
+      if (!data.email || !data.message) {
+        throw new Error('Please fill in all required fields');
+      }
+
       await emailjs.send(
-        "service_c5mp3jm", // Replace with your EmailJS Service ID
-        "template_0t0pj4v", // Replace with your EmailJS Template ID
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         data,
-        "jFpB1m3tkne8zl-FD" // Replace with your EmailJS Public Key
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      toast.success("Message Sent!", {
-        description: "Thank you for reaching out. I'll get back to you soon.",
-      });
+      toast.success("Message Sent!");
       form.reset();
     } catch (error) {
-      toast.error("Error Sending Message", {
-        description: (error as Error).message || "Something went wrong.",
-      });
+      toast.error(error instanceof Error ? error.message : 'Something went wrong');
     } finally {
       setLoading(false);
     }
-  };
+  }, [loading]);
 
   return (
     <section id="contact" className="scroll-mt-16 py-16">
@@ -81,7 +80,7 @@ export function ContactSection() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 flex flex-col h-full">
+            <form onSubmit={handleSubmit} className="space-y-4 flex flex-col h-full" ref={formRef}>
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">Name</label>

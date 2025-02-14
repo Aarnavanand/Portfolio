@@ -1,5 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
-import Layout from '@/components/layout';
+import {Layout} from '@/components/layout.tsx';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/sonner';
 
