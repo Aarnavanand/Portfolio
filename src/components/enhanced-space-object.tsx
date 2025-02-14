@@ -28,25 +28,44 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
 
   const size = 150;
 
+  // Get viewport dimensions
+  const [viewport, setViewport] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+
+  // Update viewport dimensions on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setViewport({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const updatePosition = useCallback(() => {
     let newX = x.get() + velocity.current.x;
     let newY = y.get() + velocity.current.y;
 
-    // Boundary detection (prevent going off-screen)
-    if (newX < 0 || newX > window.innerWidth - size) {
-      velocity.current.x *= -1; // Reverse direction
-      newX = Math.max(0, Math.min(newX, window.innerWidth - size)); // Keep within bounds
+    // Boundary detection using viewport dimensions
+    if (newX < 0 || newX > viewport.width - size) {
+      velocity.current.x *= -1;
+      newX = Math.max(0, Math.min(newX, viewport.width - size));
     }
-    if (newY < 0 || newY > window.innerHeight - size) {
-      velocity.current.y *= -1; // Reverse direction
-      newY = Math.max(0, Math.min(newY, window.innerHeight - size)); // Keep within bounds
+    if (newY < 0 || newY > viewport.height - size) {
+      velocity.current.y *= -1;
+      newY = Math.max(0, Math.min(newY, viewport.height - size));
     }
 
     x.set(newX);
     y.set(newY);
 
     requestAnimationFrame(updatePosition);
-  }, [x, y, size, velocity]);
+  }, [x, y, size, viewport.width, viewport.height]);
 
   useEffect(() => {
     requestAnimationFrame(updatePosition);
@@ -63,7 +82,7 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
       <motion.div
         ref={ref}
         className={cn(
-          'absolute select-none w-24 h-24 md:w-36 md:h-36 flex items-center justify-center',
+          'fixed select-none w-24 h-24 md:w-36 md:h-36 flex items-center justify-center',
           className
         )}
         style={{
@@ -73,6 +92,7 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
           zIndex: 0,
           touchAction: 'none',
           willChange: 'transform',
+          pointerEvents: 'none',
         }}
       >
         {/* Glow effect */}
