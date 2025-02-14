@@ -317,7 +317,7 @@ export function Layout() {
           </motion.div>
         </section>
 
-        <div className="space-y-16">
+        <div>
           <div id="about">
             <AboutSection />
           </div>
