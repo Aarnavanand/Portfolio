@@ -13,6 +13,11 @@ const containerVariants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
 };
 
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = "service_c5mp3jm";
+const EMAILJS_TEMPLATE_ID = "template_0t0pj4v";
+const EMAILJS_PUBLIC_KEY = "jFpB1m3tkne8zl-FD";
+
 export function ContactSection() {
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -21,24 +26,24 @@ export function ContactSection() {
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (loading) return;
-    
+
     setLoading(true);
     const form = e.currentTarget;
-    
+
     try {
       const formData = new FormData(form);
       const data = Object.fromEntries(formData.entries());
-      
+
       // Validate data before sending
-      if (!data.email || !data.message) {
+      if (!data.name || !data.email || !data.message) {
         throw new Error('Please fill in all required fields');
       }
 
       await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         data,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        EMAILJS_PUBLIC_KEY
       );
 
       toast.success("Message Sent!");
