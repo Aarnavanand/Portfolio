@@ -183,6 +183,7 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
           touchAction: 'none',
           willChange: 'transform',
           pointerEvents: 'none',
+          transform: 'translateZ(0)', // Add hardware acceleration
         }}
       >
         <div className="absolute inset-0 rounded-full bg-primary/30 blur-2xl" />

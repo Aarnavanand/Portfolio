@@ -2,7 +2,7 @@ import { useRef, useMemo, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, ChevronLeft, ChevronRight, Globe } from "lucide-react";
+import { ExternalLink, ChevronLeft, ChevronRight, Globe } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
@@ -31,51 +31,35 @@ const categoryIcons: { [key: string]: React.ElementType } = {
 const projectCategories: ProjectCategories = {
   "Web Projects": [
     {
-      title: "Cosmic Chat 1",
-      description: "Real-time chat application with space-themed UI",
-      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["React", "Node.js", "WebSocket", "Tailwind"],
-      demoUrl: "#",
+      title: "Algorithm Visualizer",
+      description: "Interactive learning tool to visualize",
+      image: "/Algorithm-Visualizer.png",
+      tags: ["React", "Framer Motion", "TypeScript", "Tailwind"],
+      demoUrl: "https://visual-algorithm-lab.vercel.app/",
       githubUrl: "#",
     },
     {
-      title: "Cosmic Chat 2",
-      description: "A futuristic social media platform",
-      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
-      demoUrl: "#",
+      title: "IWRS",
+      description: "A Interactive Web Randomization System",
+      image: "/IWRSv1.png",
+      tags: ["Next.js", "MongoDB", "Tailwind", "Next.js API Routes"],
+      demoUrl: "https://interactive-web-randomization-system.vercel.app/",
       githubUrl: "#",
     },
     {
-      title: "Cosmic Chat 2",
-      description: "A futuristic social media platform",
-      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
-      demoUrl: "#",
+      title: "Enterprise resource planning",
+      description: "System for managing/tracking resources",
+      image: "/ERPv1.jpg",
+      tags: ["Next.js", "Postgress", "Tailwind", "shadcn Ui Library"],
+      demoUrl: "https://skoolmate.vercel.app/",
       githubUrl: "#",
     },
     {
-      title: "Cosmic Chat 2",
-      description: "A futuristic social media platform",
-      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      title: "Cosmic Chat 2",
-      description: "A futuristic social media platform",
-      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      title: "Cosmic Chat 2",
-      description: "A futuristic social media platform",
-      image: "https://images.unsplash.com/photo-1581822261290-991b38693d1b?w=800&auto=format&fit=crop&q=80",
-      tags: ["Next.js", "MongoDB", "Tailwind", "Framer Motion"],
-      demoUrl: "#",
+      title: "Krishi-Connect",
+      description: "platform where farmers can connect with Ai",
+      image: "/FDSS.png",
+      tags: ["Next.js", "MongoDB", "Tailwind", "Artificial Intelligence"],
+      demoUrl: "https://github.com/Aarnavanand/Krishi-Connect",
       githubUrl: "#",
     },
   ],
@@ -182,12 +166,15 @@ export function ProjectsSection() {
                                   Demo
                                 </a>
                               </Button>
-                              <Button size="sm" variant="outline" asChild>
-                                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                                  <Github className="mr-2 h-4 w-4" />
-                                  Code
-                                </a>
-                              </Button>
+                              {/* Conditionally render GitHub button */}
+                              {/* {project.githubUrl && (
+                                <Button size="sm" variant="outline" asChild>
+                                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                    <Github className="mr-2 h-4 w-4" />
+                                    Code
+                                  </a>
+                                </Button>
+                              )} */}
                             </div>
                           </div>
                         </div>

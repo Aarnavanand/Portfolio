@@ -78,10 +78,10 @@ export function ContactSection() {
             <div className="flex flex-col items-center mb-6">
               <Coffee className="h-10 w-10 text-primary" />
               <h2 className="text-4xl font-bold tracking-tight mt-2">
-                Coffee with me?
+                Chai with me?
               </h2>
               <p className="text-muted-foreground text-center max-w-md mt-2">
-                "Brewing ideas and connections—one coffee at a time." ☕✨
+                "Brewing ideas and connections—one Chai at a time." ☕✨
               </p>
             </div>
 
