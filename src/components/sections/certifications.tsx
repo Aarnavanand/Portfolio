@@ -13,11 +13,11 @@ const certifications = [
     badges: ['React', 'Frontend'],
   },
   {
-    name: 'JavaScript',
-    organization: 'Hackerrank',
-    date: 'October 2024',
-    credential: 'Hackerrank-JavaScript',
-    link: 'https://www.hackerrank.com/certificates/2b9e2324ae4c',
+    name: 'Full Stack Web Development',
+    organization: 'Udemy',
+    date: 'May 2025',
+    credential: 'Udemy-ReactJS',
+    link: 'https://www.udemy.com/certificate/UC-182602a5-1bc7-4517-a351-996cc2a7cf67/',
     badges: ['JavaScript', 'Frontend Development'],
   },
   {
