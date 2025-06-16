@@ -62,6 +62,14 @@ const projectCategories: ProjectCategories = {
       demoUrl: "https://github.com/Aarnavanand/Krishi-Connect",
       githubUrl: "#",
     },
+    {
+      title: "hangman-code",
+      description: "Game where you guess the programming concepts",
+      image: "/hangman.png",
+      tags: ["React", "Tailwind", "TypeScript", "Framer Motion"],
+      demoUrl: "https://github.com/Aarnavanand/Krishi-Connect",
+      githubUrl: "#",
+    },
   ],
 };
 
