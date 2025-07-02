@@ -26,34 +26,40 @@ export function ContactSection() {
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (loading) return;
-
+  
     setLoading(true);
     const form = e.currentTarget;
-
+  
     try {
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
-
-      // Validate data before sending
-      if (!data.name || !data.email || !data.message) {
-        throw new Error('Please fill in all required fields');
+      const data = {
+        from_name: formData.get('name'),
+        reply_to: formData.get('email'),
+        subject: formData.get('subject'),
+        message: formData.get('message'),
+      };
+  
+      // Check all fields filled
+      if (!data.from_name || !data.reply_to || !data.subject || !data.message) {
+        throw new Error("Please fill in all required fields");
       }
-
+  
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         data,
         EMAILJS_PUBLIC_KEY
       );
-
+  
       toast.success("Message Sent!");
       form.reset();
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Something went wrong');
+      toast.error(error instanceof Error ? error.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
-  }, [loading]);
+}, [loading]);
+
 
   return (
     <section id="contact" className="scroll-mt-16 py-16">
