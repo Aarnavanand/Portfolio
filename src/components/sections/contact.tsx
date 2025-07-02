@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
 // EmailJS configuration (replace with your actual values)
-const EMAILJS_SERVICE_ID = "service_c5mp3jm";
+const EMAILJS_SERVICE_ID = "service_eibq4qb";
 const EMAILJS_TEMPLATE_ID = "template_0t0pj4v";
 const EMAILJS_PUBLIC_KEY = "jFpB1m3tkne8zl-FD";
 
