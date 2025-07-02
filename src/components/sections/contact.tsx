@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,69 +10,75 @@ import { Coffee, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
+// EmailJS configuration (replace with your actual values)
+const EMAILJS_SERVICE_ID = "service_c5mp3jm";
+const EMAILJS_TEMPLATE_ID = "template_0t0pj4v";
+const EMAILJS_PUBLIC_KEY = "jFpB1m3tkne8zl-FD";
+
+// Framer motion animation
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
 };
 
-// EmailJS configuration
-const EMAILJS_SERVICE_ID = "service_c5mp3jm";
-const EMAILJS_TEMPLATE_ID = "template_0t0pj4v";
-const EMAILJS_PUBLIC_KEY = "jFpB1m3tkne8zl-FD";
-
 export function ContactSection() {
   const [loading, setLoading] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
-  // Debounced submit handler
-  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (loading) return;
-  
-    setLoading(true);
-    const form = e.currentTarget;
-  
-    try {
-      const formData = new FormData(form);
-      const data = {
-        from_name: formData.get('name'),
-        reply_to: formData.get('email'),
-        subject: formData.get('subject'),
-        message: formData.get('message'),
-      };
-  
-      // Check all fields filled
-      if (!data.from_name || !data.reply_to || !data.subject || !data.message) {
-        throw new Error("Please fill in all required fields");
-      }
-  
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        data,
-        EMAILJS_PUBLIC_KEY
-      );
-  
-      toast.success("Message Sent!");
-      form.reset();
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-}, [loading]);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (loading) return;
+      setLoading(true);
 
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+
+      // Match EmailJS template variable names exactly
+      const data = {
+        from_name: formData.get("name")?.toString().trim(),
+        reply_to: formData.get("email")?.toString().trim(),
+        subject: formData.get("subject")?.toString().trim(),
+        message: formData.get("message")?.toString().trim(),
+      };
+
+      // Basic field validation
+      if (!data.from_name || !data.reply_to || !data.subject || !data.message) {
+        toast.error("Please fill in all required fields.");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          data,
+          EMAILJS_PUBLIC_KEY
+        );
+
+        toast.success("Message sent successfully!");
+        form.reset();
+      } catch (error: any) {
+        toast.error(error?.text || "Sending failed. Please try again.");
+        console.error("EmailJS error:", error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [loading]
+  );
 
   return (
     <section id="contact" className="scroll-mt-16 py-16">
-      <motion.div 
-        initial="hidden" 
-        whileInView="visible" 
-        variants={containerVariants} 
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
         className="mx-auto max-w-5xl"
       >
         <div className="md:flex md:flex-row-reverse md:items-center md:gap-12">
-          {/* Left Side - SVG */}
+          {/* Left Side - SVG Image */}
           <div className="hidden md:flex w-full max-w-sm items-center justify-center">
             <img
               src="/donate2.svg"
@@ -91,27 +99,70 @@ export function ContactSection() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4 flex flex-col h-full" ref={formRef}>
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4 flex flex-col h-full"
+              ref={formRef}
+            >
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">Name</label>
-                  <Input name="name" id="name" placeholder="John Doe" required className="bg-background/60" />
+                  <label htmlFor="name" className="text-sm font-medium">
+                    Name
+                  </label>
+                  <Input
+                    name="name"
+                    id="name"
+                    placeholder="John Doe"
+                    required
+                    className="bg-background/60"
+                  />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">Email</label>
-                  <Input name="email" id="email" type="email" placeholder="john@example.com" required className="bg-background/60" />
+                  <label htmlFor="email" className="text-sm font-medium">
+                    Email
+                  </label>
+                  <Input
+                    name="email"
+                    id="email"
+                    type="email"
+                    placeholder="john@example.com"
+                    required
+                    className="bg-background/60"
+                  />
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">Subject</label>
-                <Input name="subject" id="subject" placeholder="Project Inquiry" required className="bg-background/60" />
+                <label htmlFor="subject" className="text-sm font-medium">
+                  Subject
+                </label>
+                <Input
+                  name="subject"
+                  id="subject"
+                  placeholder="Project Inquiry"
+                  required
+                  className="bg-background/60"
+                />
               </div>
               <div className="space-y-2 flex-1">
-                <label htmlFor="message" className="text-sm font-medium">Message</label>
-                <Textarea name="message" id="message" placeholder="Tell me about your project..." required className="min-h-[150px] bg-background/60" />
+                <label htmlFor="message" className="text-sm font-medium">
+                  Message
+                </label>
+                <Textarea
+                  name="message"
+                  id="message"
+                  placeholder="Tell me about your project..."
+                  required
+                  className="min-h-[150px] bg-background/60"
+                />
               </div>
-              <Button type="submit" className="w-full flex items-center justify-center" disabled={loading}>
-                {loading ? "Sending..." : (
+              <Button
+                type="submit"
+                className="w-full flex items-center justify-center"
+                disabled={loading}
+              >
+                {loading ? (
+                  "Sending..."
+                ) : (
                   <>
                     <MessageSquare className="mr-2 h-4 w-4" />
                     Send Message
