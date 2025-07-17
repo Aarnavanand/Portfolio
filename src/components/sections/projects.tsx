@@ -2,7 +2,7 @@ import { useRef, useMemo, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, ChevronLeft, ChevronRight, Globe } from "lucide-react";
+import { ExternalLink, ChevronLeft, ChevronRight, Globe, Github } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperClass } from "swiper";
 import "swiper/css";
@@ -56,19 +56,53 @@ const projectCategories: ProjectCategories = {
     },
     {
       title: "Krishi-Connect",
-      description: "platform where farmers can connect with Ai",
+      description: "platform -> farmers can connect with Ai",
       image: "/FDSS.png",
       tags: ["Next.js", "MongoDB", "Tailwind", "Artificial Intelligence"],
-      demoUrl: "https://github.com/Aarnavanand/Krishi-Connect",
-      githubUrl: "#",
+      demoUrl: "#",
+      githubUrl: "https://github.com/Aarnavanand/Krishi-Connect",
     },
     {
       title: "hangman-code",
-      description: "Game where you guess the programming concepts",
+      description: "Quiz Game of programming concepts",
       image: "/hangman.png",
       tags: ["React", "Tailwind", "TypeScript", "Framer Motion"],
       demoUrl: "https://hangman-code-game.vercel.app/",
       githubUrl: "#",
+    },
+  ],
+  " AI/ML Projects": [
+     {
+       title: "Meddy Buddy",
+       description: "MediBuddy is an intelligent medicine recommendation system designed to help users discover alternative medications Based on their previous Medicines.",
+       image: "/meddypuddy.png",
+       tags: ["streamlit", "pandas", "numpy", "pickle-mixin", "pillow", "scikit-learn"],
+       demoUrl: " https://medi-buddy.streamlit.app/",
+       githubUrl: "",
+     },
+     {
+       title: "Movie Recommendation System",
+       description: "This Streamlit application leverages collaborative filtering to provide personalized movie recommendations based on user input.",
+       image: "/movie.png",
+       tags: ["streamlit", "joblib", "scipy", "streamlit_lottie", "plotly"],
+       demoUrl: "https://arnavanand.streamlit.app/",
+       githubUrl: "#",
+     },
+    {
+      title: "Text Analytics Tool",
+      description: "Text analytics is the automated process of translating large volumes of unstructured text into quantitative data to uncover insights",
+      image: "/text-analytics.png",
+      tags: ["Python", "Streamlit", "Scikit-learn", "PyTorch"],
+      demoUrl: "#",
+      githubUrl: "https://github.com/Aarnavanand/text-analytics",
+    },
+    {
+      title: "Image Classification",
+      description: "A project that classifies images using machine learning,I used various mdoel but the final pipeline is base on ResNet-18 model. ",
+      image: "/imgclassification.png",
+      tags: ["Python", "pytorch", "clearml", "split-folders", "simple-parsing"],
+      demoUrl: "#",
+      githubUrl: "https://github.com/Aarnavanand/image-classification-ML",
     },
   ],
 };
@@ -168,21 +202,24 @@ export function ProjectsSection() {
                               ))}
                             </div>
                             <div className="flex gap-4">
-                              <Button size="sm" asChild>
-                                <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                                  <ExternalLink className="mr-2 h-4 w-4" />
-                                  Demo
-                                </a>
-                              </Button>
+                              {/* Conditionally render Demo button */}
+                              {project.demoUrl && project.demoUrl !== "#" && (
+                                <Button size="sm" asChild>
+                                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                                    <ExternalLink className="mr-2 h-4 w-4" />
+                                    Demo
+                                  </a>
+                                </Button>
+                              )}
                               {/* Conditionally render GitHub button */}
-                              {/* {project.githubUrl && (
+                              {project.githubUrl && project.githubUrl !== "#" && (
                                 <Button size="sm" variant="outline" asChild>
                                   <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                                     <Github className="mr-2 h-4 w-4" />
                                     Code
                                   </a>
                                 </Button>
-                              )} */}
+                              )}
                             </div>
                           </div>
                         </div>

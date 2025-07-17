@@ -88,7 +88,7 @@ export function ContactSection() {
           </div>
 
           {/* Right Side - Form */}
-          <Card className="flex-1 md:w-2/3 p-6 sm:p-8 shadow-md bg-background/60 flex flex-col">
+          <Card className="flex-1 md:w-2/3 p-6 sm:p-8 shadow-md bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex flex-col">
             <div className="flex flex-col items-center mb-6">
               <Coffee className="h-10 w-10 text-primary" />
               <h2 className="text-4xl font-bold tracking-tight mt-2">
@@ -114,7 +114,7 @@ export function ContactSection() {
                     id="name"
                     placeholder="John Doe"
                     required
-                    className="bg-background/60"
+                    className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
                   />
                 </div>
                 <div className="space-y-2">
@@ -127,7 +127,7 @@ export function ContactSection() {
                     type="email"
                     placeholder="john@example.com"
                     required
-                    className="bg-background/60"
+                    className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
                   />
                 </div>
               </div>
@@ -140,7 +140,7 @@ export function ContactSection() {
                   id="subject"
                   placeholder="Project Inquiry"
                   required
-                  className="bg-background/60"
+                  className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
                 />
               </div>
               <div className="space-y-2 flex-1">
@@ -152,7 +152,7 @@ export function ContactSection() {
                   id="message"
                   placeholder="Tell me about your project..."
                   required
-                  className="min-h-[150px] bg-background/60"
+                  className="min-h-[150px] bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
                 />
               </div>
               <Button
