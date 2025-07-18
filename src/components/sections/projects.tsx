@@ -29,7 +29,7 @@ const categoryIcons: { [key: string]: React.ElementType } = {
 };
 
 const projectCategories: ProjectCategories = {
-  "Web Projects": [
+  "Web Projects": [ 
     {
       title: "Algorithm Visualizer",
       description: "Interactive learning tool to visualize",
