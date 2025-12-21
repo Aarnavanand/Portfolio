@@ -55,14 +55,6 @@ const projectCategories: ProjectCategories = {
       githubUrl: "#",
     },
     {
-      title: "Krishi-Connect",
-      description: "platform -> farmers can connect with Ai",
-      image: "/FDSS.png",
-      tags: ["Next.js", "MongoDB", "Tailwind", "Artificial Intelligence"],
-      demoUrl: "#",
-      githubUrl: "https://github.com/Aarnavanand/Krishi-Connect",
-    },
-    {
       title: "hangman-code",
       description: "Quiz Game of programming concepts",
       image: "/hangman.png",
