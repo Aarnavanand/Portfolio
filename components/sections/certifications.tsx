@@ -7,36 +7,36 @@ import { motion } from 'framer-motion';
 
 const certifications = [
   {
-    name: 'Frontend (ReactJs)',
-    organization: 'Hackerrank',
+    name: 'Frontend Development with React',
+    organization: 'HackerRank',
     date: 'October 2024',
-    credential: 'Hackerrank-ReactJS',
+    credential: 'Verified Credential',
     link: 'https://www.hackerrank.com/certificates/06be4281380d',
-    badges: ['React', 'Frontend'],
+    badges: ['React', 'JavaScript', 'Advanced'],
   },
   {
-    name: 'Full Stack Web Development',
+    name: 'Full Stack Web Development Specialization',
     organization: 'Udemy',
     date: 'May 2025',
-    credential: 'Udemy-ReactJS',
+    credential: 'Verified Credential',
     link: 'https://www.udemy.com/certificate/UC-182602a5-1bc7-4517-a351-996cc2a7cf67/',
-    badges: ['JavaScript', 'Frontend Development'],
+    badges: ['MERN Stack', 'Backend', 'Databases'],
   },
   {
-    name: 'Python',
-    organization: 'Hackerrank',
-    date: 'september 2024',
-    credential: 'Hackerrank-Learning',
+    name: 'Python Programming Mastery',
+    organization: 'HackerRank',
+    date: 'September 2024',
+    credential: 'Verified Credential',
     link: 'https://www.hackerrank.com/certificates/f46a68adc6f3',
-    badges: ['Python','Artificial Intelligence'],
+    badges: ['Python', 'Backend', 'Scripting'],
   },
   {
-    name: 'Gen-AI',
-    organization: 'Google',
+    name: 'Generative AI Fundamentals',
+    organization: 'Google Cloud',
     date: 'March 2024',
-    credential: 'Google-cloud-Gen-AI',
+    credential: 'Verified Credential',
     link: 'https://www.linkedin.com/in/aarnav-anand-aa163728a/details/certifications/',
-    badges: ['Gen-AI', 'AI'],
+    badges: ['AI/ML', 'LLMs', 'Cloud'],
   }
 ];
 
