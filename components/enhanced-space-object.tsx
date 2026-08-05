@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 import { useEffect, useRef, forwardRef, memo, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -58,27 +58,13 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
   const x = useMotionValue(initialPosition.current.x);
   const y = useMotionValue(initialPosition.current.y);
 
-  // Optimized spring configuration based on screen size
-  const getSpringConfig = () => {
-    const { isLargeScreen } = viewportRef.current;
-    return {
-      stiffness: isLargeScreen ? 40 : 50,
-      damping: isLargeScreen ? 15 : 20,
-      mass: isLargeScreen ? 1.2 : 1,
-      restSpeed: 0.001
-    };
-  };
-
-  const springX = useSpring(x, getSpringConfig());
-  const springY = useSpring(y, getSpringConfig());
-
   // Enhanced velocity with screen-size awareness
   const velocity = useRef({
-    x: (Math.random() * 2 - 1) * getVelocityScale(),
-    y: (Math.random() * 2 - 1) * getVelocityScale()
+    x: (Math.random() * 2 - 1) * 0.25,
+    y: (Math.random() * 2 - 1) * 0.25
   });
 
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const isMoving = useRef(true);
 
   // Enhanced resize handler
@@ -199,10 +185,16 @@ const EnhancedSpaceObject = memo(forwardRef<HTMLDivElement, EnhancedSpaceObjectP
           'fixed select-none flex items-center justify-center',
           className
         )}
+        transition={{
+          type: 'spring',
+          damping: 20,
+          stiffness: 50,
+          mass: 1
+        }}
         style={{
           position: 'fixed',
-          x: springX,
-          y: springY,
+          x,
+          y,
           zIndex: 0,
           touchAction: 'none',
           willChange: 'transform',
