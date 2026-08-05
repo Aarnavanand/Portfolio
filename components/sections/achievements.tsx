@@ -44,38 +44,38 @@ const cardVariants = {
 
 export function AchievementsSection() {
   return (
-    <section id="achievements" className="scroll-mt-16 py-16">
+    <section id="achievements" className="scroll-mt-20 py-24">
       <motion.div initial="hidden" whileInView="visible" variants={containerVariants}>
-        <div className="space-y-6">
-          {/* Title Section with Icon */}
-          <div className="flex items-center justify-center gap-3 text-center mb-4">
-          <div className="flex h-10 w-10 items-center justify-center">
-            <Medal className="h-6 w-6 text-primary" />
+        <div className="space-y-12">
+          <div className="space-y-6 text-center">
+            <div className="inline-flex items-center justify-center gap-3">
+              <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
+              <Medal className="h-5 w-5 text-primary" />
+              <span className="text-sm font-semibold text-primary uppercase tracking-widest">Milestones</span>
+              <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Achievements</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Notable accomplishments and recognition throughout my career journey</p>
           </div>
-          <h2 className="text-4xl font-bold tracking-tight">Achievements</h2>
-        </div>
-          <p className="text-muted-foreground text-center">Milestones reached in my journey</p>
 
           <div className="grid gap-6 md:grid-cols-2">
             {achievements.map((achievement) => {
-              const Icon = achievement.icon; // Ensure icon component is capitalized
+              const Icon = achievement.icon;
 
               return (
                 <motion.div key={achievement.title} variants={cardVariants} initial="hidden" whileInView="visible">
-                  <Card className="relative overflow-hidden border bg-background/60 p-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10" />
+                  <Card className="group relative overflow-hidden p-6 hover:shadow-premium-lg transition-all duration-300">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="relative flex gap-4">
-                      {/* Icon */}
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:shadow-glow">
                         <Icon className="h-6 w-6 text-primary" />
                       </div>
-                      <div className="space-y-1">
-                        <h3 className="font-bold flex items-center gap-2">
-                          <Icon className="h-5 w-5 text-primary" />
+                      <div className="space-y-2 flex-grow">
+                        <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
                           {achievement.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground">{achievement.description}</p>
-                        <p className="text-sm font-medium text-primary">{achievement.year}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{achievement.description}</p>
+                        <p className="text-xs font-semibold text-primary pt-1">{achievement.year}</p>
                       </div>
                     </div>
                   </Card>

@@ -26,66 +26,72 @@ export function AboutSection() {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <section id="about" className="scroll-mt-16 py-16">
+    <section id="about" className="scroll-mt-20 py-24">
       <motion.div
-        className={cn("space-y-8")}
-        initial="hidden"   // Initially hidden
-        whileInView="visible"   // Becomes visible when scrolled into view
+        className={cn("space-y-12")}
+        initial="hidden"
+        whileInView="visible"
         viewport={sectionOptions}
-        variants={sharedAnimationVariants.containerVariants}  // Uses defined animation variants
+        variants={sharedAnimationVariants.containerVariants}
       >
         <motion.div key="about-category" variants={cardVariants}>
-          <div className="space-y-4 text-center">
+          <div className="space-y-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="flex items-center justify-center gap-2"
+              className="inline-flex items-center justify-center gap-3 mx-auto"
             >
-              <User className="h-6 w-6 text-primary" />
-              <h2 className="text-4xl font-bold tracking-tight">About Me</h2>
+              <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
+              <User className="h-5 w-5 text-primary" />
+              <span className="text-sm font-semibold text-primary uppercase tracking-widest">About</span>
+              <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
             </motion.div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            As a passionate developer, I craft digital experiences that push the boundaries of web technology.
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Premium Developer</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Crafting elegant digital experiences with purpose-driven design and cutting-edge technology.
             </p>
           </div>
         </motion.div>
 
         <motion.div key="card-category" variants={cardVariants}>
-          <Card className="relative overflow-hidden border bg-background/60 p-6 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <motion.div variants={cardVariants} className="relative flex flex-col md:flex-row items-center gap-6">
-              <div className="w-40 h-40 md:w-52 md:h-52 rounded-full overflow-hidden border-4 border-primary shadow-lg">
+          <Card className="relative overflow-hidden p-8 md:p-12">
+            <motion.div variants={cardVariants} className="relative flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              <div className="shrink-0 w-48 h-48 md:w-56 md:h-56 rounded-xl overflow-hidden border border-border/40 shadow-premium-lg">
                 <img
                   src={imageError ? "/fallback-image.svg" : "/loveu.svg"}
                   alt="Profile"
-                  className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+                  className="object-cover w-full h-full hover:scale-110 transition-transform duration-700"
                   onError={() => setImageError(true)}
                   loading="lazy"
                 />
               </div>
-              <div className="flex-1 space-y-4 text-center md:text-left">
-                <h3 className="text-2xl font-bold">Journey Through Space & Code</h3>
-                <p className="text-muted-foreground">
-                Hi, I'm Aarnav Anand, a B.Tech CSE student at SRM University. I'm a fresher with a passion for full-stack development and have built several projects. I specialize in the MERN stack and enjoy crafting innovative digital solutions.
+              <div className="flex-1 space-y-6 text-center md:text-left">
+                <div className="space-y-2">
+                  <h3 className="text-3xl font-bold">Aarnav Anand</h3>
+                  <p className="text-primary font-semibold">Full Stack Developer</p>
+                </div>
+                <p className="text-base text-muted-foreground leading-relaxed max-w-lg">
+                  B.Tech CSE student at SRM University with a passion for building elegant solutions with modern technologies. Specialized in MERN stack, crafting digital experiences that combine functionality with premium design.
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2">
-                    <Rocket className="h-5 w-5 text-primary" />
-                    <span>Fresher, Building Projects</span>
+                <div className="grid grid-cols-2 gap-4 py-4">
+                  <div className="flex items-start gap-3">
+                    <Rocket className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Building Projects</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="h-5 w-5 text-primary" />
-                    <span>MERN Stack Enthusiast</span>
+                  <div className="flex items-start gap-3">
+                    <Star className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">MERN Stack</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Code className="h-5 w-5 text-primary" />
-                    <span>Full Stack Developer</span>
+                  <div className="flex items-start gap-3">
+                    <Code className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Full Stack</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Coffee className="h-5 w-5 text-primary" />
-                    <span>∞ Coffee Consumed</span>
+                  <div className="flex items-start gap-3">
+                    <Coffee className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm">Coffee Driven</span>
                   </div>
                 </div>
-                <div className="flex justify-center md:justify-start gap-2 mt-4">
+                <div className="flex justify-center md:justify-start gap-2 pt-2">
                   <Badge variant="secondary">Full Stack Developer</Badge>
                   <Badge variant="secondary">MERN Stack</Badge>
                 </div>

@@ -81,36 +81,23 @@ export default function HomePage() {
       {/* Header */}
       <motion.header
         initial={{ y: 0 }}
-        animate={{ y: isScrolled ? -2 : 0 }}
+        animate={{ y: 0 }}
         className={cn(
-          'fixed top-0 w-full border-b z-50 transition-all duration-300 px-4 sm:px-6 md:px-20 rounded-full backdrop-filter',
-          isScrolled
-            ? 'bg-background/95 backdrop-blur-2xl shadow-lg'
-            : 'bg-background/80 backdrop-blur-xl'
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          isScrolled ? 'glass-effect-strong shadow-premium' : 'glass-effect'
         )}
       >
-        <div className="container mx-auto max-w-screen-xl flex h-16 items-center justify-between">
+        <div className="container mx-auto max-w-screen-xl flex h-16 items-center justify-between px-4 sm:px-6 md:px-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3"
+            className="flex items-center gap-2"
           >
             <div className="relative">
               <img
                 src="/Asset3.svg"
                 alt="Logo"
-                className="h-10 w-10 sm:h-14 sm:w-14 text-primary"
-              />
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                }}
-                className="absolute inset-0 rounded-full bg-primary/20 blur-sm"
+                className="h-8 w-8 sm:h-10 sm:w-10 text-primary"
               />
             </div>
           </motion.div>

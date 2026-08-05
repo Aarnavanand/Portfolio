@@ -20,6 +20,16 @@
   --color-input: #18181b;
 
   --radius: 0.5rem;
+  
+  /* Spacing system */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
 }
 
 @layer base {
@@ -72,8 +82,47 @@
     text-wrap: pretty;
   }
 
+  /* Glass Effect */
+  .glass-effect {
+    background: rgba(15, 15, 30, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-effect-strong {
+    background: rgba(15, 15, 30, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Premium Shadows */
+  .shadow-premium {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .shadow-premium-lg {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 24px rgba(99, 102, 241, 0.2);
+  }
+
+  .shadow-glow-lg {
+    box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+  }
+
+  /* Animations */
   .fade-in {
     animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.4s ease-out;
   }
 
   @keyframes fadeIn {
@@ -82,6 +131,28 @@
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
     }
   }
 }
