@@ -34,31 +34,31 @@ const projectCategories: ProjectCategories = {
   "Web Projects": [ 
     {
       title: "Algorithm Visualizer",
-      description: "An interactive platform that brings computer science algorithms to life. Visualize sorting, searching, and pathfinding algorithms in real-time with customizable inputs and step-by-step execution.",
+      description: "Interactive learning tool to visualize",
       image: "/Algorithm-Visualizer.png",
       tags: ["React", "Framer Motion", "TypeScript", "Tailwind"],
       demoUrl: "https://visual-algorithm-lab.vercel.app/",
       githubUrl: "#",
     },
     {
-      title: "Interactive Web Randomization System",
-      description: "A sophisticated system for managing randomized data workflows. Built with scalable architecture to handle complex randomization logic — perfect for applications requiring probabilistic data generation.",
+      title: "IWRS",
+      description: "A Interactive Web Randomization System",
       image: "/IWRSv1.png",
       tags: ["Next.js", "MongoDB", "Tailwind", "Next.js API Routes"],
       demoUrl: "https://interactive-web-randomization-system.vercel.app/",
       githubUrl: "#",
     },
     {
-      title: "Enterprise Resource Planner",
-      description: "A comprehensive ERP solution designed for educational institutions. Streamlines resource allocation, student management, and administrative workflows with an intuitive interface and powerful backend.",
+      title: "Enterprise resource planning",
+      description: "System for managing/tracking resources",
       image: "/ERPv1.jpg",
-      tags: ["Next.js", "PostgreSQL", "Tailwind", "shadcn UI"],
+      tags: ["Next.js", "Postgress", "Tailwind", "shadcn Ui Library"],
       demoUrl: "https://skoolmate.vercel.app/",
       githubUrl: "#",
     },
     {
-      title: "Code Hangman",
-      description: "A gamified learning experience that challenges developers to master programming concepts through an engaging hangman-style interface. Perfect for quick skill checks and concept reinforcement.",
+      title: "hangman-code",
+      description: "Quiz Game of programming concepts",
       image: "/hangman.png",
       tags: ["React", "Tailwind", "TypeScript", "Framer Motion"],
       demoUrl: "https://hangman-code-game.vercel.app/",
@@ -68,41 +68,41 @@ const projectCategories: ProjectCategories = {
   " AI/ML Projects": [
      {
        title: "Meddy Buddy",
-       description: "An intelligent medicine recommendation engine powered by machine learning. Analyzes patient medication history to suggest alternative pharmaceuticals — helping users discover optimal drug alternatives with precision.",
+       description: "MediBuddy is an intelligent medicine recommendation system designed to help users discover alternative medications Based on their previous Medicines.",
        image: "/meddypuddy.png",
-       tags: ["Streamlit", "Pandas", "NumPy", "Scikit-learn", "Pickle"],
+       tags: ["streamlit", "pandas", "numpy", "pickle-mixin", "pillow", "scikit-learn"],
        demoUrl: " https://medi-buddy.streamlit.app/",
        githubUrl: "",
      },
      {
        title: "Movie Recommendation System",
-       description: "A personalized content discovery platform using collaborative filtering algorithms. Analyzes user preferences and viewing patterns to deliver highly accurate movie recommendations tailored to individual taste.",
+       description: "This Streamlit application leverages collaborative filtering to provide personalized movie recommendations based on user input.",
        image: "/movie.png",
-       tags: ["Streamlit", "Scipy", "Plotly", "Joblib", "Collaborative Filtering"],
+       tags: ["streamlit", "joblib", "scipy", "streamlit_lottie", "plotly"],
        demoUrl: "https://arnavanand.streamlit.app/",
        githubUrl: "#",
      },
      {
        title: "CommandPal",
-       description: "Bridge the gap between natural language and terminal commands. This AI-powered tool translates human-readable instructions into precise CLI commands using Google's Gemini API — making command-line interfaces accessible to everyone.",
+       description: "CommandPal is a powerful web application that converts natural language instructions into precise terminal commands using Google's Gemini API",
        image: "/commandpal.png",
-       tags: ["Next.js", "TypeScript", "Gemini API", "shadcn UI", "Generative AI"],
+       tags: ["Nextjs", "Typescript", "Shcadcn UI", "gen AI", "Gamini API"],
        demoUrl: "https://command-pal.vercel.app/",
        githubUrl: "#",
      },
      {
-       title: "AI Chatbot",
-       description: "A modern conversational interface powered by Google Gemini. Delivers intelligent, context-aware responses with a polished UI — demonstrating sophisticated integration of generative AI within production-grade web applications.",
+       title: "AI Chat",
+       description: "I chat application built by Aarnav Anand and powered by Google Gemini AI. This application provides an elegant interface for conversing with Google's advanced Gemini AI model",
        image: "/chat-bot.png",
-       tags: ["Next.js", "TypeScript", "Gemini API", "shadcn UI", "Generative AI"],
+       tags: ["Nextjs", "Typescript", "Shcadcn UI", "gen AI", "Gamini API"],
        demoUrl: "https://genai-chatbot-five.vercel.app/",
        githubUrl: "#",
      },
     {
-      title: "Text Analytics Platform",
-      description: "Advanced text processing and analysis tool leveraging NLP techniques to extract meaningful insights from unstructured data. Transforms raw text into actionable intelligence through machine learning-driven analysis.",
+      title: "Text Analytics Tool",
+      description: "Text analytics is the automated process of translating large volumes of unstructured text into quantitative data to uncover insights. This project uses various NLP techniques to analyze data.",
       image: "/text-analytics.png",
-      tags: ["Python", "Streamlit", "Scikit-learn", "PyTorch", "NLP"],
+      tags: ["Python", "Streamlit", "Scikit-learn", "PyTorch"],
       demoUrl: "#",
       githubUrl: "https://github.com/Aarnavanand/text-analytics",
     },
@@ -153,12 +153,12 @@ export function ProjectsSection() {
           <div className="inline-flex items-center justify-center gap-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
             <Globe className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Case Studies</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Portfolio</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground">Selected Work</h2>
-          <p className="text-lg text-foreground max-w-3xl mx-auto leading-relaxed font-light">
-            Projects that demonstrate thoughtful engineering, solid architecture, and attention to both technical and user experience details.
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Featured Projects</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Professional case studies showcasing innovative solutions built with modern technologies and best practices.
           </p>
         </div>
 
@@ -221,8 +221,8 @@ export function ProjectsSection() {
                           </div>
                           <div className="p-6 space-y-4 flex flex-col flex-grow">
                             <div className="space-y-2 flex-grow">
-                              <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
-                              <p className="text-sm text-foreground/70 leading-relaxed">{project.description}</p>
+                              <h3 className="text-lg font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+                              <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                             </div>
                             <div className="space-y-4 pt-2">
                               <div className="flex flex-wrap gap-2">

@@ -3,21 +3,17 @@ import '@/styles/globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'Aarnav Anand - Software Engineer & System Designer',
+  title: 'Aarnav Anand - Full Stack Developer',
   description:
-    'Software engineer specializing in full-stack development, system design, and product architecture. Expert in building scalable applications with thoughtful design systems and production-grade code quality.',
+    'Full-stack developer crafting immersive digital experiences. Specializing in MERN stack, Next.js, and modern web technologies.',
   keywords: [
-    'software engineer',
     'full-stack developer',
-    'system design',
-    'product design',
-    'design systems',
     'MERN stack',
     'Next.js',
     'React',
     'Node.js',
-    'web architecture',
-    'software architecture',
+    'portfolio',
+    'web development',
   ],
   authors: [{ name: 'Aarnav Anand' }],
   creator: 'Aarnav Anand',
@@ -25,24 +21,24 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://aarnavanand.dev',
-    title: 'Aarnav Anand - Software Engineer & System Designer',
+    title: 'Aarnav Anand - Full Stack Developer',
     description:
-      'Software engineer with expertise in full-stack development, system architecture, design systems, and product design. Building scalable, thoughtfully designed applications.',
-    siteName: 'Aarnav Anand',
+      'Full-stack developer crafting immersive digital experiences. Specializing in MERN stack, Next.js, and modern web technologies.',
+    siteName: 'Aarnav Anand Portfolio',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Aarnav Anand - Software Engineer Portfolio',
+        alt: 'Aarnav Anand Portfolio',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Aarnav Anand - Software Engineer & System Designer',
+    title: 'Aarnav Anand - Full Stack Developer',
     description:
-      'Full-stack engineer with deep expertise in system architecture, design systems, and product design. Crafting production-grade applications.',
+      'Full-stack developer crafting immersive digital experiences. Specializing in MERN stack, Next.js, and modern web technologies.',
     images: ['/og-image.png'],
   },
 };

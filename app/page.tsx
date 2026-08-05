@@ -243,7 +243,7 @@ export default function HomePage() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="container mx-auto max-w-screen-xl py-16 relative z-10 px-4 sm:px-6 md:px-8 lg:px-12">
+      <main className="container mx-auto max-w-screen-xl py-16 relative z-10 px-4 sm:px-6 md:px-20">
         <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
           <motion.div
             className="space-y-6 text-center"
@@ -252,22 +252,27 @@ export default function HomePage() {
             transition={{ duration: 1, ease: 'easeOut' }}
           >
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent"
+              style={{
+                backgroundImage: `url('/textures/noise.png'), linear-gradient(to right, #6366F1, #9333EA)`,
+                backgroundSize: '200px, cover',
+                backgroundBlendMode: 'overlay',
+              }}
             >
-              I&apos;m Aarnav Anand
+              Hey, I&apos;m Aarnav Anand
             </h1>
 
             <motion.p
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground max-w-4xl mx-auto leading-relaxed font-light"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
             >
-              <span className="font-semibold text-primary">Software engineer</span> and <span className="font-semibold text-primary">systems designer</span> focused on building thoughtfully designed, scalable applications. I think deeply about architecture, design systems, and the craft of software—balancing technical rigor with elegant user experiences.
+              A full-stack developer and an undergraduate student, crafting immersive digital experiences—one project at a time.
             </motion.p>
 
             <motion.div
-              className="flex justify-center gap-4 flex-wrap"
+              className="flex justify-center gap-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 1 }}
@@ -275,24 +280,26 @@ export default function HomePage() {
               <Button
                 size="lg"
                 asChild
+                className="hover:shadow-lg hover:shadow-primary/50 transition duration-300"
               >
                 <a
                   href="#projects"
                   onClick={(e) => handleNavClick(e, '#projects')}
                 >
-                  View My Work
+                  Explore My Universe
                 </a>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 asChild
+                className="hover:shadow-lg hover:shadow-purple-500/50 transition duration-300"
               >
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
                 >
-                  Let's Collaborate
+                  Let&apos;s Connect
                 </a>
               </Button>
             </motion.div>
