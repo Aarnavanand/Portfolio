@@ -153,12 +153,12 @@ export function ProjectsSection() {
           <div className="inline-flex items-center justify-center gap-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
             <Globe className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Portfolio</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Case Studies</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Featured Projects</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Professional case studies showcasing innovative solutions built with modern technologies and best practices.
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground">Selected Work</h2>
+          <p className="text-lg text-foreground max-w-3xl mx-auto leading-relaxed font-light">
+            Projects that demonstrate thoughtful engineering, solid architecture, and attention to both technical and user experience details.
           </p>
         </div>
 
@@ -221,8 +221,8 @@ export function ProjectsSection() {
                           </div>
                           <div className="p-6 space-y-4 flex flex-col flex-grow">
                             <div className="space-y-2 flex-grow">
-                              <h3 className="text-lg font-bold group-hover:text-primary transition-colors">{project.title}</h3>
-                              <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+                              <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
+                              <p className="text-sm text-foreground/70 leading-relaxed">{project.description}</p>
                             </div>
                             <div className="space-y-4 pt-2">
                               <div className="flex flex-wrap gap-2">

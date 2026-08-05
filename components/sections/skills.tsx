@@ -132,12 +132,12 @@ export function SkillsSection() {
           >
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
             <Sparkles className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Expertise</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Core Expertise</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
           </motion.div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Technical Skills</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            A comprehensive overview of my technical expertise across frontend, backend, database, and cloud technologies.
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground">Technical Capabilities</h2>
+          <p className="text-lg text-foreground max-w-3xl mx-auto leading-relaxed font-light">
+            Strong foundation across the full stack. I prioritize clean architecture, scalable patterns, and building systems that developers enjoy working with.
           </p>
         </div>
 
@@ -152,8 +152,8 @@ export function SkillsSection() {
                       <category.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="text-lg font-bold">{category.category}</h3>
-                      <p className="text-sm text-muted-foreground">{category.description}</p>
+                      <h3 className="text-lg font-bold text-foreground">{category.category}</h3>
+                      <p className="text-sm text-foreground/70 font-light">{category.description}</p>
                     </div>
                   </div>
 
@@ -166,9 +166,9 @@ export function SkillsSection() {
                         onHoverEnd={() => debouncedSetHoveredSkill(null)}
                       >
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-semibold">{skill.name}</span>
+                          <span className="text-sm font-semibold text-foreground">{skill.name}</span>
                           <span className={`text-xs font-medium transition-all duration-200 ${
-                            skill.isHovered ? 'text-primary scale-110' : 'text-muted-foreground'
+                            skill.isHovered ? 'text-primary scale-110' : 'text-foreground/60'
                           }`}>
                             {skill.level}%
                           </span>

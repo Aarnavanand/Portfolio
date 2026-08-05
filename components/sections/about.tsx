@@ -46,9 +46,9 @@ export function AboutSection() {
               <span className="text-sm font-semibold text-primary uppercase tracking-widest">About</span>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
             </motion.div>
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Full Stack Developer & Problem Solver</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              I transform complex ideas into scalable digital solutions — blending clean code, thoughtful design, and modern technologies to create products that matter.
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground">Software Engineer with System Design Focus</h2>
+            <p className="text-lg text-foreground max-w-3xl mx-auto leading-relaxed font-light">
+              I engineer products with architectural rigor and design discipline. My approach balances technical depth with user-centered thinking—building systems that scale cleanly and interfaces that feel intuitive.
             </p>
           </div>
         </motion.div>
@@ -67,28 +67,28 @@ export function AboutSection() {
               </div>
               <div className="flex-1 space-y-6 text-center md:text-left">
                 <div className="space-y-2">
-                  <h3 className="text-3xl font-bold">Aarnav Anand</h3>
-                  <p className="text-primary font-semibold">Full Stack Engineer | B.Tech CSE, SRM University</p>
+                  <h3 className="text-3xl font-bold text-foreground">Aarnav Anand</h3>
+                  <p className="text-primary font-semibold text-base">Software Engineer | System Designer | B.Tech CSE</p>
                 </div>
-                <p className="text-base text-muted-foreground leading-relaxed max-w-lg">
-                  I'm a full stack developer driven by curiosity and a passion for building things that work beautifully. My expertise spans the modern web stack — from intuitive React frontends to robust Node.js backends — and I specialize in the MERN architecture. Currently, I'm focused on crafting production-grade applications that solve real problems while maintaining clean, maintainable code that scales.
+                <p className="text-base text-foreground leading-relaxed max-w-lg">
+                  I'm a software engineer who believes that great products emerge from the intersection of technical excellence and thoughtful design. My work spans full-stack development—with deep expertise in MERN and Next.js architectures—but my focus extends beyond code. I think critically about system design patterns, design systems, product architecture, and how technical decisions impact user experience. I've built production applications handling complex requirements, and I approach each project with rigor around scalability, maintainability, and craft.
                 </p>
                 <div className="grid grid-cols-2 gap-4 py-4">
                   <div className="flex items-start gap-3">
-                    <Rocket className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">Full Stack Development</span>
+                    <Code className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm font-medium">Full Stack Engineering</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Star className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">Web Architecture</span>
+                    <span className="text-sm font-medium">System Architecture</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Code className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">System Design</span>
+                    <Rocket className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                    <span className="text-sm font-medium">Design Systems</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Coffee className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                    <span className="text-sm">Problem Solving</span>
+                    <span className="text-sm font-medium">Product Design</span>
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-start gap-2 pt-2">
