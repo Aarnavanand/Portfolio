@@ -17,46 +17,45 @@ const skills = [
   {
     category: 'Frontend Development',
     icon: Layout,
-    description: 'Building beautiful, responsive user interfaces',
+    description: 'Crafting pixel-perfect, responsive interfaces with modern tools',
     items: [
       { name: 'HTML/CSS', level: 95 },
-      { name: 'Tailwind CSS', level: 85 },
-      { name: 'JavaScript', level: 90 },
-      { name: 'ReactJS', level: 75 },
-      // { name: 'Streamlit', level: 60 },
+      { name: 'Tailwind CSS', level: 90 },
+      { name: 'JavaScript/ES6+', level: 92 },
+      { name: 'React & Next.js', level: 88 },
     ],
   },
   {
     category: 'Backend Development',
     icon: Code2,
-    description: 'Creating robust server-side applications',
+    description: 'Engineering scalable, performant server architectures',
     items: [
-      { name: 'Node.js', level: 90 },
-      { name: 'ExpressJS', level: 85 },
-      { name: 'Python', level: 65 },
-      { name: 'Nextjs', level: 90 },
+      { name: 'Node.js & Express', level: 90 },
+      { name: 'Next.js Full Stack', level: 92 },
+      { name: 'Python', level: 70 },
+      { name: 'API Design & REST', level: 88 },
     ],
   },
   {
     category: 'Database & Cloud',
     icon: Database,
-    description: 'Managing data and cloud infrastructure',
+    description: 'Designing data systems and deploying at scale',
     items: [
       { name: 'PostgreSQL', level: 90 },
       { name: 'MongoDB', level: 85 },
-      { name: 'AWS', level: 80 },
-      { name: 'MySQL', level: 75 },
+      { name: 'AWS Services', level: 80 },
+      { name: 'Database Design', level: 88 },
     ],
   },
   {
-    category: 'Tools & Others',
+    category: 'Developer Tools',
     icon: Terminal,
-    description: 'Development tools and practices',
+    description: 'Mastering workflows and modern development practices',
     items: [
-      { name: 'Git', level: 95 },
-      { name: 'Vercel', level: 85 },
-      { name: 'Github Copilot', level: 90 },
-      { name: 'AI Editor', level: 85 },
+      { name: 'Git & GitHub', level: 95 },
+      { name: 'Vercel & Deployment', level: 88 },
+      { name: 'TypeScript', level: 85 },
+      { name: 'Dev Tools & Debugging', level: 90 },
     ],
   },
 ];
@@ -133,12 +132,12 @@ export function SkillsSection() {
           >
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
             <Sparkles className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Expertise</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Core Expertise</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
           </motion.div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Technical Skills</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            A comprehensive overview of my technical expertise across frontend, backend, database, and cloud technologies.
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground">Technical Capabilities</h2>
+          <p className="text-lg text-foreground max-w-3xl mx-auto leading-relaxed font-light">
+            Strong foundation across the full stack. I prioritize clean architecture, scalable patterns, and building systems that developers enjoy working with.
           </p>
         </div>
 
@@ -153,8 +152,8 @@ export function SkillsSection() {
                       <category.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="text-lg font-bold">{category.category}</h3>
-                      <p className="text-sm text-muted-foreground">{category.description}</p>
+                      <h3 className="text-lg font-bold text-foreground">{category.category}</h3>
+                      <p className="text-sm text-foreground/70 font-light">{category.description}</p>
                     </div>
                   </div>
 
@@ -167,9 +166,9 @@ export function SkillsSection() {
                         onHoverEnd={() => debouncedSetHoveredSkill(null)}
                       >
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-semibold">{skill.name}</span>
+                          <span className="text-sm font-semibold text-foreground">{skill.name}</span>
                           <span className={`text-xs font-medium transition-all duration-200 ${
-                            skill.isHovered ? 'text-primary scale-110' : 'text-muted-foreground'
+                            skill.isHovered ? 'text-primary scale-110' : 'text-foreground/60'
                           }`}>
                             {skill.level}%
                           </span>

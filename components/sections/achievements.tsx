@@ -7,14 +7,14 @@ import { motion } from "framer-motion";
 const achievements = [
   {
     icon: Trophy,
-    title: "Ideathon Winner",
-    description: "Ideathon - Engineer's Day Event at SRM University",
+    title: "Ideathon Champion",
+    description: "Won first place at Engineer's Day Ideathon — presented and pitched an innovative full-stack solution to a panel of industry experts.",
     year: "2023",
   },
   {
     icon: Award,
-    title: "Attended Web3 Workshop",
-    description: "Web3 Workshop at IIT Delhi",
+    title: "Web3 Workshop Participant",
+    description: "Advanced training at IIT Delhi — deepened knowledge of blockchain architecture and decentralized systems from leading practitioners.",
     year: "2024",
   }
   // {
