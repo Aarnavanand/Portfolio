@@ -142,29 +142,45 @@ export function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" className="scroll-mt-16">
+    <section id="projects" className="scroll-mt-20 py-24">
       <motion.div
-        className="space-y-8"
+        className="space-y-16"
         initial="hidden"
         whileInView="visible"
         variants={sharedAnimationVariants.containerVariants}
       >
+        <div className="space-y-6 text-center">
+          <div className="inline-flex items-center justify-center gap-3">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
+            <Globe className="h-5 w-5 text-primary" />
+            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Portfolio</span>
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Featured Projects</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Professional case studies showcasing innovative solutions built with modern technologies and best practices.
+          </p>
+        </div>
+
         {categories.map((category) => {
           const projects = projectCategories[category];
           const Icon = categoryIcons[category] || Globe;
 
           return (
-            <div key={category} className="space-y-4">
-              <div className="flex items-center justify-between text-center">
-                <div className="flex items-center gap-2">
-                  <Icon className="h-6 w-6 text-primary" />
-                  <h2 className="text-3xl font-bold tracking-tighter">{category}</h2>
+            <div key={category} className="space-y-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold">{category}</h3>
                 </div>
                 <div className="flex gap-2">
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={() => handleSlideNav('prev', category)}
+                    className="hover:bg-primary/10"
                   >
                     <ChevronLeft className="h-5 w-5" />
                   </Button>
@@ -172,6 +188,7 @@ export function ProjectsSection() {
                     variant="outline"
                     size="icon"
                     onClick={() => handleSlideNav('next', category)}
+                    className="hover:bg-primary/10"
                   >
                     <ChevronRight className="h-5 w-5" />
                   </Button>
@@ -180,56 +197,59 @@ export function ProjectsSection() {
 
               <Swiper
                 onSwiper={(swiper) => handleSwiperInit(swiper, category)}
-                spaceBetween={16}
+                spaceBetween={24}
                 slidesPerView={1.2}
                 breakpoints={{
                   640: { slidesPerView: 1.5 },
-                  768: { slidesPerView: 2.2 },
-                  1024: { slidesPerView: 3 },
+                  768: { slidesPerView: 2 },
+                  1024: { slidesPerView: 2.5 },
+                  1440: { slidesPerView: 3 },
                 }}
               >
                 {projects.map((project, index) => (
                   <SwiperSlide key={`${project.title}-${index}`}>
                     <motion.div variants={sharedAnimationVariants.cardVariants}>
-                      <Card className="group relative overflow-hidden border bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10" />
-                        <div className="relative">
-                          <div className="aspect-video w-full overflow-hidden">
+                      <Card className="group relative overflow-hidden flex flex-col h-full hover:shadow-premium-lg transition-all duration-300">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="relative flex flex-col h-full">
+                          <div className="aspect-video w-full overflow-hidden bg-background/50">
                             <img
                               src={project.image}
                               alt={project.title}
-                              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
                             />
                           </div>
-                          <div className="p-6 space-y-4">
-                            <h3 className="text-xl font-bold">{project.title}</h3>
-                            <p className="text-muted-foreground">{project.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                              {project.tags.map((tag) => (
-                                <Badge key={tag} variant="secondary">
-                                  {tag}
-                                </Badge>
-                              ))}
+                          <div className="p-6 space-y-4 flex flex-col flex-grow">
+                            <div className="space-y-2 flex-grow">
+                              <h3 className="text-lg font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+                              <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                             </div>
-                            <div className="flex gap-4">
-                              {/* Conditionally render Demo button */}
-                              {project.demoUrl && project.demoUrl !== "#" && (
-                                <Button size="sm" asChild>
-                                  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
-                                    <ExternalLink className="mr-2 h-4 w-4" />
-                                    Demo
-                                  </a>
-                                </Button>
-                              )}
-                              {/* Conditionally render GitHub button */}
-                              {project.githubUrl && project.githubUrl !== "#" && (
-                                <Button size="sm" variant="outline" asChild>
-                                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                                    <Github className="mr-2 h-4 w-4" />
-                                    Code
-                                  </a>
-                                </Button>
-                              )}
+                            <div className="space-y-4 pt-2">
+                              <div className="flex flex-wrap gap-2">
+                                {project.tags.map((tag) => (
+                                  <Badge key={tag} variant="secondary" className="text-xs">
+                                    {tag}
+                                  </Badge>
+                                ))}
+                              </div>
+                              <div className="flex gap-3 pt-2">
+                                {project.demoUrl && project.demoUrl !== "#" && (
+                                  <Button size="sm" asChild className="flex-1">
+                                    <a href={project.demoUrl} target="_blank" rel="noopener noreferrer">
+                                      <ExternalLink className="mr-2 h-4 w-4" />
+                                      Demo
+                                    </a>
+                                  </Button>
+                                )}
+                                {project.githubUrl && project.githubUrl !== "#" && (
+                                  <Button size="sm" variant="outline" asChild className="flex-1">
+                                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                                      <Github className="mr-2 h-4 w-4" />
+                                      Code
+                                    </a>
+                                  </Button>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>

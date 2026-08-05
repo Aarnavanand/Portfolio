@@ -53,53 +53,55 @@ const cardVariants = {
 
 export function CertificationsSection() {
   return (
-    <section id="certifications" className="scroll-mt-16 py-16">
+    <section id="certifications" className="scroll-mt-20 py-24">
       <motion.div initial="hidden" whileInView="visible" variants={containerVariants}>
-        <div className="space-y-6">
-          {/* Title Section with Icon */}
-          <div className="flex justify-center items-center gap-3 text-center">
-            <GraduationCap className="h-6 w-6 text-primary flex-shrink-0" /> 
-            <h2 className="text-4xl font-bold tracking-tighter leading-none">Certifications</h2>
+        <div className="space-y-12">
+          <div className="space-y-6 text-center">
+            <div className="inline-flex items-center justify-center gap-3">
+              <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
+              <GraduationCap className="h-5 w-5 text-primary" />
+              <span className="text-sm font-semibold text-primary uppercase tracking-widest">Credentials</span>
+              <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
+            </div>
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Certifications</h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">Professional credentials from industry-leading organizations</p>
           </div>
-          <p className="text-muted-foreground text-center">Professional certifications</p>
 
           <div className="grid gap-6 md:grid-cols-2">
             {certifications.map((cert) => (
               <motion.div key={cert.name} variants={cardVariants}>
-                <Card
-                  className="relative overflow-hidden border bg-background/60 p-6 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10" />
-                  <div className="relative space-y-4">
+                <Card className="group relative overflow-hidden p-6 hover:shadow-premium-lg transition-all duration-300 h-full flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative space-y-4 flex-grow">
                     <div className="flex items-start justify-between">
-                      <div className="space-y-1">
-                        <h3 className="font-bold">{cert.name}</h3>
+                      <div className="space-y-2 flex-grow">
+                        <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{cert.name}</h3>
                         <p className="text-sm text-muted-foreground">{cert.organization}</p>
                       </div>
-                      <Award className="h-5 w-5 text-primary" />
+                      <Award className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <Calendar className="h-3.5 w-3.5" />
                       <span>{cert.date}</span>
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 pt-2">
                       {cert.badges.map((badge) => (
-                        <Badge key={badge} variant="secondary">
+                        <Badge key={badge} variant="secondary" className="text-xs">
                           {badge}
                         </Badge>
                       ))}
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
-                      <ExternalLink className="h-4 w-4" />
-                      <a
-                        href={cert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline"
-                      >
-                        {cert.credential}
-                      </a>
-                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs pt-4 border-t border-border/30 mt-4 pt-4">
+                    <ExternalLink className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline truncate font-medium"
+                    >
+                      View Credential
+                    </a>
                   </div>
                 </Card>
               </motion.div>
