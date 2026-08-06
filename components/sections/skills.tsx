@@ -136,25 +136,25 @@ export function SkillsSection() {
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">Expertise</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
           </motion.div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Technical Skills</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            A comprehensive overview of my technical expertise across frontend, backend, database, and cloud technologies.
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">Technical Capabilities</h2>
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed font-light">
+            Strong foundation across the full stack. I prioritize clean architecture, scalable patterns, and building systems developers enjoy working with.
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
           {skillItems.map((category) => (
             <motion.div key={category.category} variants={cardVariants}>
-              <Card className="relative overflow-hidden group h-full hover:shadow-premium-lg transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Card className="relative overflow-hidden group h-full glass-effect-premium shadow-premium-md hover-lift border-primary/5">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative space-y-6 p-8">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:shadow-glow">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-all duration-300">
                       <category.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="text-lg font-bold">{category.category}</h3>
-                      <p className="text-sm text-muted-foreground">{category.description}</p>
+                      <h3 className="text-lg font-semibold text-foreground">{category.category}</h3>
+                      <p className="text-sm text-foreground/60 font-light">{category.description}</p>
                     </div>
                   </div>
 
@@ -167,9 +167,9 @@ export function SkillsSection() {
                         onHoverEnd={() => debouncedSetHoveredSkill(null)}
                       >
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-semibold">{skill.name}</span>
+                          <span className="text-sm font-semibold text-foreground">{skill.name}</span>
                           <span className={`text-xs font-medium transition-all duration-200 ${
-                            skill.isHovered ? 'text-primary scale-110' : 'text-muted-foreground'
+                            skill.isHovered ? 'text-primary scale-110' : 'text-foreground/60'
                           }`}>
                             {skill.level}%
                           </span>

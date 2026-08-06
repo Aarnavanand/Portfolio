@@ -54,8 +54,8 @@ export function AchievementsSection() {
               <span className="text-sm font-semibold text-primary uppercase tracking-widest">Milestones</span>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Achievements</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Notable accomplishments and recognition throughout my career journey</p>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">Achievements</h2>
+            <p className="text-lg text-foreground/70 max-w-3xl mx-auto font-light">Recognitions and milestones achieved through dedication to excellence and continuous learning.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -64,18 +64,18 @@ export function AchievementsSection() {
 
               return (
                 <motion.div key={achievement.title} variants={cardVariants} initial="hidden" whileInView="visible">
-                  <Card className="group relative overflow-hidden p-6 hover:shadow-premium-lg transition-all duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Card className="group relative overflow-hidden p-6 glass-effect-premium shadow-premium-md hover-lift border-primary/5">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <div className="relative flex gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:shadow-glow">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-all duration-300">
                         <Icon className="h-6 w-6 text-primary" />
                       </div>
                       <div className="space-y-2 flex-grow">
-                        <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
+                        <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
                           {achievement.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{achievement.description}</p>
-                        <p className="text-xs font-semibold text-primary pt-1">{achievement.year}</p>
+                        <p className="text-sm text-foreground/60 leading-relaxed font-light">{achievement.description}</p>
+                        <p className="text-xs font-semibold text-primary/80 pt-2">{achievement.year}</p>
                       </div>
                     </div>
                   </Card>

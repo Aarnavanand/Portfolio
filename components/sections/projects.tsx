@@ -153,12 +153,12 @@ export function ProjectsSection() {
           <div className="inline-flex items-center justify-center gap-3">
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
             <Globe className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Portfolio</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Case Studies</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Featured Projects</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Professional case studies showcasing innovative solutions built with modern technologies and best practices.
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">Selected Work</h2>
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed font-light">
+            Projects that demonstrate thoughtful engineering, solid architecture, and attention to both technical and user experience details.
           </p>
         </div>
 
@@ -209,20 +209,20 @@ export function ProjectsSection() {
                 {projects.map((project, index) => (
                   <SwiperSlide key={`${project.title}-${index}`}>
                     <motion.div variants={sharedAnimationVariants.cardVariants}>
-                      <Card className="group relative overflow-hidden flex flex-col h-full hover:shadow-premium-lg transition-all duration-300">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <Card className="group relative overflow-hidden flex flex-col h-full glass-effect-premium shadow-premium-md hover-lift border-primary/5">
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         <div className="relative flex flex-col h-full">
-                          <div className="aspect-video w-full overflow-hidden bg-background/50">
+                          <div className="aspect-video w-full overflow-hidden bg-background/30">
                             <img
                               src={project.image}
                               alt={project.title}
-                              className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
+                              className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
                             />
                           </div>
-                          <div className="p-6 space-y-4 flex flex-col flex-grow">
+                          <div className="p-6 space-y-4 flex flex-col flex-grow border-t border-foreground/5">
                             <div className="space-y-2 flex-grow">
-                              <h3 className="text-lg font-bold group-hover:text-primary transition-colors">{project.title}</h3>
-                              <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+                              <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{project.title}</h3>
+                              <p className="text-sm text-foreground/60 leading-relaxed font-light">{project.description}</p>
                             </div>
                             <div className="space-y-4 pt-2">
                               <div className="flex flex-wrap gap-2">

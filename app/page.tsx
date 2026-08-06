@@ -83,11 +83,13 @@ export default function HomePage() {
         initial={{ y: 0 }}
         animate={{ y: 0 }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          isScrolled ? 'glass-effect-strong shadow-premium' : 'glass-effect'
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b',
+          isScrolled 
+            ? 'glass-effect-strong shadow-premium-md border-primary/10' 
+            : 'glass-effect border-transparent'
         )}
       >
-        <div className="container mx-auto max-w-screen-xl flex h-16 items-center justify-between px-4 sm:px-6 md:px-8">
+        <div className="container mx-auto max-w-screen-2xl flex h-16 items-center justify-between px-4 sm:px-6 md:px-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -103,33 +105,27 @@ export default function HomePage() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.div
                 key={item.href}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.08 }}
               >
-                <Button
-                  variant="ghost"
-                  className="relative group px-4"
-                  asChild
+                <a
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="relative text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-2 group"
                 >
-                  <a
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
-                    className="flex items-center"
-                  >
-                    <item.icon className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
-                    {item.label}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary"
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </a>
-                </Button>
+                  <item.icon className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  <span>{item.label}</span>
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-transparent"
+                    whileHover={{ width: '100%' }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </a>
               </motion.div>
             ))}
           </nav>
@@ -243,7 +239,7 @@ export default function HomePage() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="container mx-auto max-w-screen-xl py-16 relative z-10 px-4 sm:px-6 md:px-20">
+      <main className="container mx-auto max-w-screen-2xl py-20 relative z-10 px-4 sm:px-6 md:px-12 lg:px-16">
         <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
           <motion.div
             className="space-y-6 text-center"

@@ -63,24 +63,24 @@ export function CertificationsSection() {
               <span className="text-sm font-semibold text-primary uppercase tracking-widest">Credentials</span>
               <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
             </div>
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tighter">Certifications</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">Professional credentials from industry-leading organizations</p>
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">Certifications</h2>
+            <p className="text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed font-light">Professional credentials demonstrating expertise and commitment to continuous learning.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             {certifications.map((cert) => (
               <motion.div key={cert.name} variants={cardVariants}>
-                <Card className="group relative overflow-hidden p-6 hover:shadow-premium-lg transition-all duration-300 h-full flex flex-col">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <Card className="group relative overflow-hidden p-6 glass-effect-premium shadow-premium-md hover-lift border-primary/5 h-full flex flex-col">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative space-y-4 flex-grow">
                     <div className="flex items-start justify-between">
                       <div className="space-y-2 flex-grow">
-                        <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{cert.name}</h3>
-                        <p className="text-sm text-muted-foreground">{cert.organization}</p>
+                        <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">{cert.name}</h3>
+                        <p className="text-sm text-foreground/60 font-light">{cert.organization}</p>
                       </div>
                       <Award className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2 text-xs text-foreground/50">
                       <Calendar className="h-3.5 w-3.5" />
                       <span>{cert.date}</span>
                     </div>
