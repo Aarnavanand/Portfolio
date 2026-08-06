@@ -83,11 +83,13 @@ export default function HomePage() {
         initial={{ y: 0 }}
         animate={{ y: 0 }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-          isScrolled ? 'glass-effect-strong shadow-premium' : 'glass-effect'
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b',
+          isScrolled 
+            ? 'glass-effect-strong shadow-premium-md border-primary/10' 
+            : 'glass-effect border-transparent'
         )}
       >
-        <div className="container mx-auto max-w-screen-xl flex h-16 items-center justify-between px-4 sm:px-6 md:px-8">
+        <div className="container mx-auto max-w-screen-2xl flex h-16 items-center justify-between px-4 sm:px-6 md:px-12">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -103,33 +105,27 @@ export default function HomePage() {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item, index) => (
               <motion.div
                 key={item.href}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.08 }}
               >
-                <Button
-                  variant="ghost"
-                  className="relative group px-4"
-                  asChild
+                <a
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="relative text-sm font-medium text-foreground/70 hover:text-foreground transition-colors duration-200 flex items-center gap-2 group"
                 >
-                  <a
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
-                    className="flex items-center"
-                  >
-                    <item.icon className="w-4 h-4 mr-2 group-hover:text-primary transition-colors" />
-                    {item.label}
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary"
-                      whileHover={{ width: '100%' }}
-                      transition={{ duration: 0.2 }}
-                    />
-                  </a>
-                </Button>
+                  <item.icon className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  <span>{item.label}</span>
+                  <motion.div
+                    className="absolute bottom-0 left-0 h-0.5 w-0 bg-gradient-to-r from-primary to-transparent"
+                    whileHover={{ width: '100%' }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </a>
               </motion.div>
             ))}
           </nav>
@@ -243,7 +239,7 @@ export default function HomePage() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="container mx-auto max-w-screen-xl py-16 relative z-10 px-4 sm:px-6 md:px-8 lg:px-12">
+      <main className="container mx-auto max-w-screen-2xl py-20 relative z-10 px-4 sm:px-6 md:px-12 lg:px-16">
         <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
           <motion.div
             className="space-y-6 text-center"
@@ -252,22 +248,27 @@ export default function HomePage() {
             transition={{ duration: 1, ease: 'easeOut' }}
           >
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent"
+              style={{
+                backgroundImage: `url('/textures/noise.png'), linear-gradient(to right, #6366F1, #9333EA)`,
+                backgroundSize: '200px, cover',
+                backgroundBlendMode: 'overlay',
+              }}
             >
-              I&apos;m Aarnav Anand
+              Hey, I&apos;m Aarnav Anand
             </h1>
 
             <motion.p
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground max-w-4xl mx-auto leading-relaxed font-light"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
             >
-              <span className="font-semibold text-primary">Software engineer</span> and <span className="font-semibold text-primary">systems designer</span> focused on building thoughtfully designed, scalable applications. I think deeply about architecture, design systems, and the craft of software—balancing technical rigor with elegant user experiences.
+              A full-stack developer and an undergraduate student, crafting immersive digital experiences—one project at a time.
             </motion.p>
 
             <motion.div
-              className="flex justify-center gap-4 flex-wrap"
+              className="flex justify-center gap-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1, duration: 1 }}
@@ -275,24 +276,26 @@ export default function HomePage() {
               <Button
                 size="lg"
                 asChild
+                className="hover:shadow-lg hover:shadow-primary/50 transition duration-300"
               >
                 <a
                   href="#projects"
                   onClick={(e) => handleNavClick(e, '#projects')}
                 >
-                  View My Work
+                  Explore My Universe
                 </a>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 asChild
+                className="hover:shadow-lg hover:shadow-purple-500/50 transition duration-300"
               >
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
                 >
-                  Let's Collaborate
+                  Let&apos;s Connect
                 </a>
               </Button>
             </motion.div>

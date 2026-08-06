@@ -17,45 +17,46 @@ const skills = [
   {
     category: 'Frontend Development',
     icon: Layout,
-    description: 'Crafting pixel-perfect, responsive interfaces with modern tools',
+    description: 'Building beautiful, responsive user interfaces',
     items: [
       { name: 'HTML/CSS', level: 95 },
-      { name: 'Tailwind CSS', level: 90 },
-      { name: 'JavaScript/ES6+', level: 92 },
-      { name: 'React & Next.js', level: 88 },
+      { name: 'Tailwind CSS', level: 85 },
+      { name: 'JavaScript', level: 90 },
+      { name: 'ReactJS', level: 75 },
+      // { name: 'Streamlit', level: 60 },
     ],
   },
   {
     category: 'Backend Development',
     icon: Code2,
-    description: 'Engineering scalable, performant server architectures',
+    description: 'Creating robust server-side applications',
     items: [
-      { name: 'Node.js & Express', level: 90 },
-      { name: 'Next.js Full Stack', level: 92 },
-      { name: 'Python', level: 70 },
-      { name: 'API Design & REST', level: 88 },
+      { name: 'Node.js', level: 90 },
+      { name: 'ExpressJS', level: 85 },
+      { name: 'Python', level: 65 },
+      { name: 'Nextjs', level: 90 },
     ],
   },
   {
     category: 'Database & Cloud',
     icon: Database,
-    description: 'Designing data systems and deploying at scale',
+    description: 'Managing data and cloud infrastructure',
     items: [
       { name: 'PostgreSQL', level: 90 },
       { name: 'MongoDB', level: 85 },
-      { name: 'AWS Services', level: 80 },
-      { name: 'Database Design', level: 88 },
+      { name: 'AWS', level: 80 },
+      { name: 'MySQL', level: 75 },
     ],
   },
   {
-    category: 'Developer Tools',
+    category: 'Tools & Others',
     icon: Terminal,
-    description: 'Mastering workflows and modern development practices',
+    description: 'Development tools and practices',
     items: [
-      { name: 'Git & GitHub', level: 95 },
-      { name: 'Vercel & Deployment', level: 88 },
-      { name: 'TypeScript', level: 85 },
-      { name: 'Dev Tools & Debugging', level: 90 },
+      { name: 'Git', level: 95 },
+      { name: 'Vercel', level: 85 },
+      { name: 'Github Copilot', level: 90 },
+      { name: 'AI Editor', level: 85 },
     ],
   },
 ];
@@ -132,28 +133,28 @@ export function SkillsSection() {
           >
             <div className="h-px w-8 bg-gradient-to-r from-transparent to-primary" />
             <Sparkles className="h-5 w-5 text-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Core Expertise</span>
+            <span className="text-sm font-semibold text-primary uppercase tracking-widest">Expertise</span>
             <div className="h-px w-8 bg-gradient-to-l from-transparent to-primary" />
           </motion.div>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground">Technical Capabilities</h2>
-          <p className="text-lg text-foreground max-w-3xl mx-auto leading-relaxed font-light">
-            Strong foundation across the full stack. I prioritize clean architecture, scalable patterns, and building systems that developers enjoy working with.
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground">Technical Capabilities</h2>
+          <p className="text-lg text-foreground/70 max-w-3xl mx-auto leading-relaxed font-light">
+            Strong foundation across the full stack. I prioritize clean architecture, scalable patterns, and building systems developers enjoy working with.
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
           {skillItems.map((category) => (
             <motion.div key={category.category} variants={cardVariants}>
-              <Card className="relative overflow-hidden group h-full hover:shadow-premium-lg transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Card className="relative overflow-hidden group h-full glass-effect-premium shadow-premium-md hover-lift border-primary/5">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative space-y-6 p-8">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-all duration-300 group-hover:shadow-glow">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/15 transition-all duration-300">
                       <category.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div className="space-y-1">
-                      <h3 className="text-lg font-bold text-foreground">{category.category}</h3>
-                      <p className="text-sm text-foreground/70 font-light">{category.description}</p>
+                      <h3 className="text-lg font-semibold text-foreground">{category.category}</h3>
+                      <p className="text-sm text-foreground/60 font-light">{category.description}</p>
                     </div>
                   </div>
 

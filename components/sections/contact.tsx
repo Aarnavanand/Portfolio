@@ -88,14 +88,14 @@ export function ContactSection() {
           </div>
 
           {/* Right Side - Form */}
-          <Card className="flex-1 md:w-2/3 p-6 sm:p-8 shadow-md bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex flex-col">
+          <Card className="flex-1 md:w-2/3 p-6 sm:p-8 glass-effect-premium shadow-premium-lg border-primary/5 hover-lift flex flex-col">
             <div className="flex flex-col items-center mb-6">
               <MessageSquare className="h-10 w-10 text-primary" />
-              <h2 className="text-4xl font-bold tracking-tight mt-2">
+              <h2 className="text-4xl font-bold tracking-tight text-foreground mt-4">
                 Let's Connect
               </h2>
-              <p className="text-muted-foreground text-center max-w-md mt-2">
-                Have an idea, opportunity, or just want to chat about web development? I'd love to hear from you — reach out anytime.
+              <p className="text-foreground/60 text-center max-w-md mt-3 font-light">
+                Have an idea, opportunity, or just want to discuss engineering? I'd love to hear from you.
               </p>
             </div>
 
@@ -106,7 +106,7 @@ export function ContactSection() {
             >
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
+                  <label htmlFor="name" className="text-sm font-semibold text-foreground">
                     Name
                   </label>
                   <Input
@@ -114,11 +114,11 @@ export function ContactSection() {
                     id="name"
                     placeholder="John Doe"
                     required
-                    className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+                    className="glass-effect border-primary/10 bg-background/40 text-foreground placeholder:text-foreground/40 focus:border-primary/50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
+                  <label htmlFor="email" className="text-sm font-semibold text-foreground">
                     Email
                   </label>
                   <Input
@@ -127,12 +127,12 @@ export function ContactSection() {
                     type="email"
                     placeholder="john@example.com"
                     required
-                    className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+                    className="glass-effect border-primary/10 bg-background/40 text-foreground placeholder:text-foreground/40 focus:border-primary/50"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">
+                <label htmlFor="subject" className="text-sm font-semibold text-foreground">
                   Subject
                 </label>
                 <Input
@@ -140,11 +140,11 @@ export function ContactSection() {
                   id="subject"
                   placeholder="Project Inquiry"
                   required
-                  className="bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+                  className="glass-effect border-primary/10 bg-background/40 text-foreground placeholder:text-foreground/40 focus:border-primary/50"
                 />
               </div>
               <div className="space-y-2 flex-1">
-                <label htmlFor="message" className="text-sm font-medium">
+                <label htmlFor="message" className="text-sm font-semibold text-foreground">
                   Message
                 </label>
                 <Textarea
@@ -152,7 +152,7 @@ export function ContactSection() {
                   id="message"
                   placeholder="Tell me about your project..."
                   required
-                  className="min-h-[150px] bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+                  className="min-h-[150px] glass-effect border-primary/10 bg-background/40 text-foreground placeholder:text-foreground/40 focus:border-primary/50 resize-none"
                 />
               </div>
               <Button
