@@ -116,7 +116,7 @@ export function SkillsSection() {
   );
 
   return (
-    <section id="skills" className="scroll-mt-20 py-24">
+    <section id="skills" className="scroll-mt-20 py-20 mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
       <motion.div
         className="space-y-12"
         initial="hidden"

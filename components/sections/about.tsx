@@ -26,7 +26,7 @@ export function AboutSection() {
   const [imageError, setImageError] = useState(false);
 
   return (
-    <section id="about" className="scroll-mt-20 py-24">
+    <section id="about" className="scroll-mt-20 py-20 mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
       <motion.div
         className={cn("space-y-12")}
         initial="hidden"

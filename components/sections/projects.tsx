@@ -142,7 +142,7 @@ export function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" className="scroll-mt-20 py-24">
+    <section id="projects" className="scroll-mt-20 py-20 mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
       <motion.div
         className="space-y-16"
         initial="hidden"

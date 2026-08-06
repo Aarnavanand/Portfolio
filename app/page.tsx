@@ -89,7 +89,7 @@ export default function HomePage() {
             : 'glass-effect border-transparent'
         )}
       >
-        <div className="container mx-auto max-w-screen-2xl flex h-16 items-center justify-between px-4 sm:px-6 md:px-12">
+        <div className="w-full max-w-6xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -239,7 +239,7 @@ export default function HomePage() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <main className="container mx-auto max-w-screen-2xl py-20 relative z-10 px-4 sm:px-6 md:px-12 lg:px-16">
+      <main className="w-full mx-auto max-w-6xl py-16 relative z-10 px-4 sm:px-6 md:px-8 lg:px-10">
         <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center">
           <motion.div
             className="space-y-6 text-center"

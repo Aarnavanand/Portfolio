@@ -70,12 +70,12 @@ export function ContactSection() {
   );
 
   return (
-    <section id="contact" className="scroll-mt-16 py-16">
+    <section id="contact" className="scroll-mt-16 py-20 mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
       <motion.div
         initial="hidden"
         whileInView="visible"
         variants={containerVariants}
-        className="mx-auto max-w-5xl"
+        className="w-full"
       >
         <div className="md:flex md:flex-row-reverse md:items-center md:gap-12">
           {/* Left Side - SVG Image */}
